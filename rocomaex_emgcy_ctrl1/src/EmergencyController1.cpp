@@ -1,6 +1,6 @@
 #include "rocomaex_emgcy_ctrl1/EmergencyController1.hpp"
 
-namespace rocoma_example {
+namespace rocomaex_emgcy_ctrl1 {
 
 EmergencyController1::EmergencyController1(): Base("EmergencyController1")
 {

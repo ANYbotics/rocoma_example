@@ -13,12 +13,12 @@
 #include "roco/controllers/Controller.hpp"
 #include "roco/controllers/adaptees/EmergencyControllerAdapteeInterface.hpp"
 
-namespace rocoma_example {
+namespace rocomaex_emgcy_ctrl2 {
 
-class EmergencyController2: public roco::Controller<rocoma_example::State, rocoma_example::Command>, public roco::EmergencyControllerAdapteeInterface
+class EmergencyController2: public roco::Controller<rocomaex_model::State, rocomaex_model::Command>, public roco::EmergencyControllerAdapteeInterface
   {
   public:
-    typedef roco::Controller<rocoma_example::State, rocoma_example::Command> Base;
+    typedef roco::Controller<rocomaex_model::State, rocomaex_model::Command> Base;
 
   public:
 

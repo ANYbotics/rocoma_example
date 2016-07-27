@@ -12,11 +12,11 @@
 #include "rocomaex_model/State.hpp"
 #include "rocomaex_model/Command.hpp"
 
-namespace rocoma_example {
+namespace rocomaex_failproof_ctrl {
 
-class FailproofController:public roco::FailproofController<rocoma_example::State, rocoma_example::Command> {
+class FailproofController:public roco::FailproofController<rocomaex_model::State, rocomaex_model::Command> {
  public:
-  using Base = roco::FailproofController<rocoma_example::State, rocoma_example::Command>;
+  using Base = roco::FailproofController<rocomaex_model::State, rocomaex_model::Command>;
  public:
 
   //! Contstructor

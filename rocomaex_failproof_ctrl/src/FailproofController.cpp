@@ -7,7 +7,7 @@
 
 #include "rocomaex_failproof_ctrl/FailproofController.hpp"
 
-namespace rocoma_example {
+namespace rocomaex_failproof_ctrl {
 
 FailproofController::FailproofController()
 :Base("FailproofController")

@@ -7,11 +7,13 @@
 
 #pragma once
 
+// roco
 #include "roco/model/CommandInterface.hpp"
 
+// message logger
 #include "message_logger/message_logger.hpp"
 
-namespace rocoma_example {
+namespace rocomaex_model {
 
 class Command: public roco::CommandInterface {
 

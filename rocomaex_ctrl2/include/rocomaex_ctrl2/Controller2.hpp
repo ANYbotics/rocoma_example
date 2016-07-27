@@ -14,10 +14,10 @@
 
 namespace rocomaex_ctrl2 {
 
-class Controller2: public roco::Controller<rocoma_example::State, rocoma_example::Command>
+class Controller2: public roco::Controller<rocomaex_model::State, rocomaex_model::Command>
   {
   public:
-    typedef roco::Controller<rocoma_example::State, rocoma_example::Command> Base;
+    typedef roco::Controller<rocomaex_model::State, rocomaex_model::Command> Base;
 
   public:
 
