@@ -1,7 +1,7 @@
 /*
  * Crawling_Task.hpp
  *
- *  Created on: Aug 20, 2014
+ *  Created on: Aug 20, 2024
  *      Author: C. Dario Bellicoso
  */
 
@@ -15,16 +15,16 @@
 
 namespace rocoma_example {
 
-class EmergencyController1: public roco::Controller<rocoma_example::State, rocoma_example::Command>, public roco::EmergencyControllerAdapteeInterface
+class EmergencyController2: public roco::Controller<rocoma_example::State, rocoma_example::Command>, public roco::EmergencyControllerAdapteeInterface
   {
   public:
     typedef roco::Controller<rocoma_example::State, rocoma_example::Command> Base;
 
   public:
 
-    EmergencyController1();
-    explicit EmergencyController1(const std::string& controllerName);
-    virtual ~EmergencyController1();
+    EmergencyController2();
+    explicit EmergencyController2(const std::string& controllerName);
+    virtual ~EmergencyController2();
 
     virtual bool create(double dt);
     virtual bool initialize(double dt);
