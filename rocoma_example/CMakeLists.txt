@@ -10,7 +10,7 @@ find_package(catkin REQUIRED COMPONENTS
 
 catkin_package(
   INCLUDE_DIRS include
-  LIBRARIES rocoma_example
+  LIBRARIES ${PROJECT_NAME}
   CATKIN_DEPENDS any_node rocoma_ros roco message_logger
   DEPENDS
 )
@@ -19,10 +19,10 @@ catkin_package(
 ## Build ##
 ###########
 include_directories(
+  include
   ${catkin_INCLUDE_DIRS}
 )
 
-# Declare a C++ library
 add_library(${PROJECT_NAME}
   src/RocomaExample.cpp
 )
