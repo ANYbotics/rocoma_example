@@ -1,0 +1,5 @@
+<library path="lib/librocomaex_ctrl1">
+  <class type="rocoma::ControllerAdapter<rocomaex_ctrl1::Controller1, rocomaex_model::State, rocomaex_model::Command>" base_class_type="roco::ControllerAdapterInterface">
+    <description>This is a controller plugin.</description>
+  </class>
+</library>

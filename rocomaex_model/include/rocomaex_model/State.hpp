@@ -17,6 +17,8 @@ namespace rocomaex_model {
 
 class State: public roco::StateInterface {
 
+ public:
+
   State(): roco::StateInterface()
   {
 
@@ -27,7 +29,7 @@ class State: public roco::StateInterface {
 
   }
 
-  bool checkState() {
+  bool checkState() const{
     MELO_INFO("[rocoma_example::State]: Checking State");
     return true;
   }

@@ -1,4 +1,7 @@
 #include "rocoma_example/RocomaExample.hpp"
+#include "rocomaex_ctrl1/Controller1.hpp"
+#include "rocomaex_model/State.hpp"
+#include "rocomaex_model/Command.hpp"
 
 #include "message_logger/message_logger.hpp"
 
@@ -16,6 +19,7 @@ RocomaExample::~RocomaExample()
 
 void RocomaExample::init()
 {
+  rocoma::ControllerAdapter<rocomaex_ctrl1::Controller1, rocomaex_model::State, rocomaex_model::Command> c;
 }
 
 void RocomaExample::cleanup()

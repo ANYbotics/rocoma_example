@@ -1,4 +1,10 @@
 #include "rocomaex_ctrl1/Controller1.hpp"
+#include <pluginlib/class_list_macros.h>
+#include "roco/controllers/adapters/ControllerAdapterInterface.hpp"
+#include "rocoma/controllers/ControllerAdapter.hpp"
+
+//using ctrll = rocoma::ControllerAdapter<rocomaex_ctrl1::Controller1, rocomaex_model::State, rocomaex_model::Command>;
+//PLUGINLIB_EXPORT_CLASS(ctrll, roco::ControllerAdapterInterface)
 
 namespace rocomaex_ctrl1 {
 

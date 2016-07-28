@@ -17,6 +17,8 @@ namespace rocomaex_model {
 
 class Command: public roco::CommandInterface {
 
+ public:
+
   Command(): roco::CommandInterface()
   {
 
