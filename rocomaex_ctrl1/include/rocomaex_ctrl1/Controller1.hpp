@@ -14,7 +14,7 @@
 
 namespace rocomaex_ctrl1 {
 
-class Controller1: public roco::Controller<rocomaex_model::State, rocomaex_model::Command>
+class Controller1: virtual public roco::Controller<rocomaex_model::State, rocomaex_model::Command>
   {
   public:
     typedef roco::Controller<rocomaex_model::State, rocomaex_model::Command> Base;
