@@ -3,9 +3,7 @@
 #include "rocoma_plugin/interfaces/ControllerPluginInterface.hpp"
 #include "rocoma_plugin/plugins/ControllerPlugin.hpp"
 
-using Controller1Plugin = rocoma_plugin::ControllerPlugin<rocomaex_ctrl1::Controller1, rocomaex_model::State, rocomaex_model::Command>;
-using Controller1PluginBase = rocoma_plugin::ControllerPluginInterface<rocomaex_model::State, rocomaex_model::Command>;
-PLUGINLIB_EXPORT_CLASS(Controller1Plugin, Controller1PluginBase)
+ROCOMA_EXPORT_CONTROLLER(Controller1Plugin, rocomaex_ctrl1::Controller1, rocomaex_model::State, rocomaex_model::Command)
 
 namespace rocomaex_ctrl1 {
 
