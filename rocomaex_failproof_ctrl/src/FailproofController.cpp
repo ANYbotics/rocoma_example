@@ -10,7 +10,7 @@
 namespace rocomaex_failproof_ctrl {
 
 FailproofController::FailproofController()
-:Base("FailproofController")
+:Base()
 {
 
 }

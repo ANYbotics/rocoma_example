@@ -2,11 +2,7 @@
 
 namespace rocomaex_ctrl2 {
 
-Controller2::Controller2(): Base("Controller2")
-{
-}
-
-Controller2::Controller2(const std::string& controllerName): Base(controllerName)
+Controller2::Controller2(): Base()
 {
 }
 

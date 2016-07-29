@@ -23,7 +23,6 @@ class EmergencyController2: public roco::Controller<rocomaex_model::State, rocom
   public:
 
     EmergencyController2();
-    explicit EmergencyController2(const std::string& controllerName);
     virtual ~EmergencyController2();
 
     virtual bool create(double dt);

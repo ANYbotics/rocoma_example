@@ -2,11 +2,7 @@
 
 namespace rocomaex_emgcy_ctrl2 {
 
-EmergencyController2::EmergencyController2(): Base("EmergencyController2")
-{
-}
-
-EmergencyController2::EmergencyController2(const std::string& controllerName): Base(controllerName)
+EmergencyController2::EmergencyController2(): Base()
 {
 }
 

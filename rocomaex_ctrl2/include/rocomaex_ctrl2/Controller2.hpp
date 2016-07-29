@@ -22,7 +22,6 @@ class Controller2: public roco::Controller<rocomaex_model::State, rocomaex_model
   public:
 
     Controller2();
-    explicit Controller2(const std::string& controllerName);
     virtual ~Controller2();
 
     virtual bool create(double dt);

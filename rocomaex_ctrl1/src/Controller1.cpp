@@ -10,11 +10,7 @@ PLUGINLIB_EXPORT_CLASS(controllerAdapter, controllerPlugin)
 
 namespace rocomaex_ctrl1 {
 
-Controller1::Controller1(): Base("Controller1")
-{
-}
-
-Controller1::Controller1(const std::string& controllerName): Base(controllerName)
+Controller1::Controller1(): Base()
 {
 }
 
