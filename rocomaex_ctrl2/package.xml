@@ -3,7 +3,7 @@
 
   <name>rocomaex_ctrl2</name>
   <version>0.0.0</version>
-  <description>The rocomaex_ctrl2 package</description>
+  <description>Second Example Controller</description>
   <maintainer email="gabriel.hottiger@mavt.ethz.ch">Gabriel Hottiger</maintainer>
   <license>BSD</license>
 
@@ -12,5 +12,13 @@
   <depend>roco</depend>
   <depend>message_logger</depend>
   <depend>rocomaex_model</depend>
+  <depend>rocoma_plugin</depend>
+  
+  <!-- IMPORTANT: The xml file has to be imported here. -->
+  <!-- All base classes are located in rocoma_plugin. -->
+  <!-- When defining your own controller package just adapt the xml path of the plugin description. -->
+  <export>
+    <rocoma_plugin plugin="${prefix}/rocomaex_ctrl2_plugin.xml" />
+  </export>
 
 </package>
