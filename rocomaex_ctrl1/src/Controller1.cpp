@@ -54,6 +54,8 @@ namespace rocomaex_ctrl1 {
 
 Controller1::Controller1(): Base()
 {
+  //IMPORTANT: initialize name in the constructor.
+  this->name_ = "Controller1";
 }
 
 Controller1::~Controller1()

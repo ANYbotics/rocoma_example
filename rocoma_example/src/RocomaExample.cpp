@@ -25,15 +25,19 @@ void RocomaExample::init()
   std::shared_ptr<boost::shared_mutex> mutexCommand(new boost::shared_mutex());
   std::shared_ptr<any_worker::WorkerManager> workerManager(new any_worker::WorkerManager());
   rocoma::ControllerAdapter<rocomaex_ctrl1::Controller1, rocomaex_model::State, rocomaex_model::Command> a();
-  controllerManager_.addController<rocomaex_model::State, rocomaex_model::Command>("rocomaex_ctrl1",
-                                                                                   "rocomaex_ctrl1",
-                                                                                   "Controller1",
-                                                                                   0.01,
-                                                                                   state,
-                                                                                   command,
-                                                                                   mutexState,
-                                                                                   mutexCommand,
-                                                                                   workerManager);
+  std::vector<std::string> controllerNames {"Controller1Plugin", "Controller2Plugin"};
+  for(auto controller : controllerNames)
+  {
+    controllerManager_.addController<rocomaex_model::State, rocomaex_model::Command>(  controller,
+                                                                                       "rocomaex_model::State",
+                                                                                       "rocomaex_model::Command",
+                                                                                       0.01,
+                                                                                       state,
+                                                                                       command,
+                                                                                       mutexState,
+                                                                                       mutexCommand,
+                                                                                       workerManager);
+  }
 }
 
 void RocomaExample::cleanup()
