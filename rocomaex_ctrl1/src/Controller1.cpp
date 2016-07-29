@@ -3,10 +3,9 @@
 #include "rocoma/plugin/ControllerPluginInterface.hpp"
 #include "rocoma/controllers/ControllerAdapter.hpp"
 
-using controllerAdapter = rocoma::ControllerAdapter<rocomaex_ctrl1::Controller1, rocomaex_model::State, rocomaex_model::Command>;
-using controllerPlugin = rocoma::ControllerPluginInterface<rocomaex_model::State, rocomaex_model::Command>;
-
-PLUGINLIB_EXPORT_CLASS(controllerAdapter, controllerPlugin)
+using Controller1Adapter = rocoma::ControllerAdapter<rocomaex_ctrl1::Controller1, rocomaex_model::State, rocomaex_model::Command>;
+using Controller1PluginBase = rocoma::ControllerPluginInterface<rocomaex_model::State, rocomaex_model::Command>;
+PLUGINLIB_EXPORT_CLASS(Controller1Adapter, Controller1PluginBase)
 
 namespace rocomaex_ctrl1 {
 
