@@ -12,10 +12,10 @@
   <depend>roco</depend>
   <depend>message_logger</depend>
   <depend>rocomaex_model</depend>
-  <depend>rocoma</depend>
+  <depend>rocoma_plugin</depend>
   
   <export>
-    <rocoma plugin="${prefix}/rocomaex_ctrl1_plugin.xml" />
+    <rocoma_plugin plugin="${prefix}/rocomaex_ctrl1_plugin.xml" />
   </export>
 
 </package>

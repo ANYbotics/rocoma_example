@@ -1,11 +1,11 @@
 #include "rocomaex_ctrl1/Controller1.hpp"
 #include <pluginlib/class_list_macros.h>
-#include "rocoma/plugin/ControllerPluginInterface.hpp"
-#include "rocoma/controllers/ControllerAdapter.hpp"
+#include "rocoma_plugin/interfaces/ControllerPluginInterface.hpp"
+#include "rocoma_plugin/plugins/ControllerPlugin.hpp"
 
-using Controller1Adapter = rocoma::ControllerAdapter<rocomaex_ctrl1::Controller1, rocomaex_model::State, rocomaex_model::Command>;
-using Controller1PluginBase = rocoma::ControllerPluginInterface<rocomaex_model::State, rocomaex_model::Command>;
-PLUGINLIB_EXPORT_CLASS(Controller1Adapter, Controller1PluginBase)
+using Controller1Plugin = rocoma_plugin::ControllerPlugin<rocomaex_ctrl1::Controller1, rocomaex_model::State, rocomaex_model::Command>;
+using Controller1PluginBase = rocoma_plugin::ControllerPluginInterface<rocomaex_model::State, rocomaex_model::Command>;
+PLUGINLIB_EXPORT_CLASS(Controller1Plugin, Controller1PluginBase)
 
 namespace rocomaex_ctrl1 {
 

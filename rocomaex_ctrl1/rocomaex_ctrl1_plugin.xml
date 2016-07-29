@@ -1,4 +1,4 @@
 <library path="lib/librocomaex_ctrl1">
-  <class type="Controller1Adapter" base_class_type="rocoma::ControllerPluginInterface<rocomaex_model::State, rocomaex_model::Command>">
+  <class type="Controller1Plugin" base_class_type="rocoma_plugin::ControllerPluginInterface<rocomaex_model::State, rocomaex_model::Command>">
   </class>
 </library>
