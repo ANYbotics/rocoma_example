@@ -6,7 +6,7 @@
 using controllerAdapter = rocoma::ControllerAdapter<rocomaex_ctrl1::Controller1, rocomaex_model::State, rocomaex_model::Command>;
 using controllerPlugin = rocoma::ControllerPluginInterface<rocomaex_model::State, rocomaex_model::Command>;
 
-PLUGINLIB_EXPORT_CLASS(controllerAdapter, controllerPlugin)
+PLUGINLIB_EXPORT_CLASS(controllerAdapter, roco::ControllerAdapterInterface)
 
 namespace rocomaex_ctrl1 {
 

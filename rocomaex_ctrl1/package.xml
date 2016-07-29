@@ -15,7 +15,7 @@
   <depend>rocoma</depend>
   
   <export>
-    <rocoma plugin="${prefix}/rocomaex_ctrl1_plugin.xml" />
+    <roco plugin="${prefix}/rocomaex_ctrl1_plugin.xml" />
   </export>
 
 </package>
