@@ -104,4 +104,10 @@ bool EmergencyController1::preStop()
   return true;
 }
 
+bool EmergencyController1::initializeFast(double dt)
+{
+  MELO_INFO_STREAM("Controller " << this->getName() << " is fast initialized!");
+  return true;
+}
+
 }

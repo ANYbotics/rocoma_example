@@ -38,7 +38,7 @@ void RocomaExample::init()
                                                                                        mutexCommand,
                                                                                        workerManager);
   }
-  std::vector<std::string> emergencyControllerNames {"EmergencyController1Plugin"};
+  std::vector<std::string> emergencyControllerNames {"EmergencyController1Plugin", "EmergencyController2Plugin"};
   for(auto controller : emergencyControllerNames)
   {
     controllerManager_.addEmergencyController<rocomaex_model::State, rocomaex_model::Command>(  controller,
@@ -51,6 +51,20 @@ void RocomaExample::init()
                                                                                        mutexCommand,
                                                                                        workerManager);
   }
+  std::vector<std::string> failproofControllerNames {"FailproofController1Plugin"};
+  for(auto controller : failproofControllerNames)
+  {
+    controllerManager_.addFailproofController<rocomaex_model::State, rocomaex_model::Command>(  controller,
+                                                                                                 "rocomaex_model::State",
+                                                                                                 "rocomaex_model::Command",
+                                                                                                 0.01,
+                                                                                                 state,
+                                                                                                 command,
+                                                                                                 mutexState,
+                                                                                                 mutexCommand,
+                                                                                                 workerManager);
+  }
+
 }
 
 void RocomaExample::cleanup()

@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <package format="2">
 
-  <name>rocomaex_emgcy_ctrl2</name>
+  <name>rocomaex_failproof_ctrl1</name>
   <version>0.0.0</version>
-  <description>Second Example Emergency Controller</description>
+  <description>First Failproof Controller</description>
   <maintainer email="gabriel.hottiger@mavt.ethz.ch">Gabriel Hottiger</maintainer>
   <license>BSD</license>
 
@@ -18,7 +18,7 @@
   <!-- All base classes are located in rocoma_plugin. -->
   <!-- When defining your own controller package just adapt the xml path of the plugin description. -->
   <export>
-    <rocoma_plugin plugin="${prefix}/rocomaex_emgcy_ctrl2_plugin.xml" />
+    <rocoma_plugin plugin="${prefix}/rocomaex_failproof_ctrl1_plugin.xml" />
   </export>
 
 </package>

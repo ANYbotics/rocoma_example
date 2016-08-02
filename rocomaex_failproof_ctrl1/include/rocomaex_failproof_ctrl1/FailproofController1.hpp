@@ -26,7 +26,7 @@
  *
  */
 /*!
- * @file    EmergencyController2.hpp
+ * @file    FailproofController1.hpp
  * @author  Gabriel Hottiger
  * @date    Jul, 2016
  */
@@ -34,48 +34,42 @@
 #pragma once
 
 // roco
-#include "roco/controllers/Controller.hpp"
-#include "roco/controllers/adaptees/EmergencyControllerAdapteeInterface.hpp"
+#include "roco/controllers/FailproofController.hpp"
 
 // rocomaex model
 #include "rocomaex_model/State.hpp"
 #include "rocomaex_model/Command.hpp"
 
 
-namespace rocomaex_emgcy_ctrl2 {
+namespace rocomaex_failproof_ctrl1 {
 
-//! Example class for a robot controller implementing the roco::ControllerAdapteeInterface
+//! Example class for a robot controller implementing the roco::FailproofControllerAdapteeInterface
 /**
  * IMPORTANT: Make sure to use virtual inheritance, prevents issues due to multiple inheritance
  */
-class EmergencyController2: virtual public roco::Controller<rocomaex_model::State, rocomaex_model::Command>, public roco::EmergencyControllerAdapteeInterface
+class FailproofController1: virtual public roco::FailproofController<rocomaex_model::State, rocomaex_model::Command>
 {
 
  public:
   //! Convenience typedef for Base class
-  typedef roco::Controller<rocomaex_model::State, rocomaex_model::Command> Base;
+  typedef roco::FailproofController<rocomaex_model::State, rocomaex_model::Command> Base;
 
  public:
   /** Default Constructor
       NOTE: Other constructors can't be invoked when using the plugin mechanism
    */
-  EmergencyController2();
+  FailproofController1();
   //! Destructor
-  virtual ~EmergencyController2();
+  virtual ~FailproofController1();
 
   /** Adaptee Implementation
         NOTE: Adaptee functionality is hidden from the client
    */
  protected:
   virtual bool create(double dt);
-  virtual bool initialize(double dt);
-  virtual bool advance(double dt);
-  virtual bool reset(double dt);
+  virtual void advance(double dt);
   virtual bool cleanup();
-  virtual bool stop();
-  virtual bool preStop();
-  virtual bool initializeFast(double dt);
 
 };
 
-} // namespace rocomaex_emgcy_ctrl2
+} // namespace rocomaex_failproof_ctrl1

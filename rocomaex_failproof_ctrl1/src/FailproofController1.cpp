@@ -26,20 +26,19 @@
  *
  */
 /*!
- * @file    EmergencyController2.cpp
+ * @file    Controller1.cpp
  * @author  Gabriel Hottiger
  * @date    Jul, 2016
  */
 
-// rocomaex ctrl2
-#include "rocomaex_emgcy_ctrl2/EmergencyController2.hpp"
+// rocomaex ctrl1
+#include "rocomaex_failproof_ctrl1/FailproofController1.hpp"
 
 // pluginlib
 #include <pluginlib/class_list_macros.h>
 
 // rocoma plugin
-#include "rocoma_plugin/interfaces/EmergencyControllerPluginInterface.hpp"
-#include "rocoma_plugin/plugins/EmergencyControllerPlugin.hpp"
+#include "rocoma_plugin/plugins/FailproofControllerPlugin.hpp"
 
 /**
  * Helper macro that wraps pluginlib's PLUGINLIB_EXPORT_CLASS(). Needed because of complicated template syntax.
@@ -48,65 +47,35 @@
  * @param State class the controller is templated on
  * @param Command class the controller is templated on
  */
-ROCOMA_EXPORT_EMERGENCY_CONTROLLER(EmergencyController2Plugin, rocomaex_emgcy_ctrl2::EmergencyController2, rocomaex_model::State, rocomaex_model::Command)
+ROCOMA_EXPORT_FAILPROOF_CONTROLLER(FailproofController1Plugin, rocomaex_failproof_ctrl1::FailproofController1, rocomaex_model::State, rocomaex_model::Command)
 
-namespace rocomaex_emgcy_ctrl2 {
+namespace rocomaex_failproof_ctrl1 {
 
-EmergencyController2::EmergencyController2(): Base()
+FailproofController1::FailproofController1(): Base()
 {
   //IMPORTANT: initialize name in the constructor.
-  this->name_ = "EmergencyController2";
+  this->name_ = "FailproofController1";
 }
 
-EmergencyController2::~EmergencyController2()
+FailproofController1::~FailproofController1()
 {
 }
 
-bool EmergencyController2::create(double dt)
+bool FailproofController1::create(double dt)
 {
   MELO_INFO_STREAM("Controller " << this->getName() << " is created!");
   return true;
 }
 
-bool EmergencyController2::initialize(double dt)
-{
-  MELO_INFO_STREAM("Controller " << this->getName() << " is initialized!");
-  return true;
-}
-
-bool EmergencyController2::advance(double dt)
+void FailproofController1::advance(double dt)
 {
   MELO_INFO_STREAM("Controller " << this->getName() << " is advanced!");
-  return true;
+  return;
 }
 
-bool EmergencyController2::reset(double dt)
-{
-  MELO_INFO_STREAM("Controller " << this->getName() << " is reset!");
-  return true;
-}
-
-bool EmergencyController2::cleanup()
+bool FailproofController1::cleanup()
 {
   MELO_INFO_STREAM("Controller " << this->getName() << " is cleaned up!");
-  return true;
-}
-
-bool EmergencyController2::stop()
-{
-  MELO_INFO_STREAM("Controller " << this->getName() << " is stopped!");
-  return true;
-}
-
-bool EmergencyController2::preStop()
-{
-  MELO_INFO_STREAM("Controller " << this->getName() << " is pre-stopped!");
-  return true;
-}
-
-bool EmergencyController2::initializeFast(double dt)
-{
-  MELO_INFO_STREAM("Controller " << this->getName() << " is fast initialized!");
   return true;
 }
 

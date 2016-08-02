@@ -16,7 +16,7 @@
   <depend>rocomaex_ctrl2</depend>
   <depend>rocomaex_emgcy_ctrl1</depend>
   <depend>rocomaex_emgcy_ctrl2</depend>
-  <depend>rocomaex_failproof_ctrl</depend>
+  <depend>rocomaex_failproof_ctrl1</depend>
   <depend>rocomaex_model</depend>
 
 </package>
