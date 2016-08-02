@@ -4,6 +4,9 @@
 
 #include "rocoma_ros/ControllerManagerRos.hpp"
 
+#include "rocomaex_model/State.hpp"
+#include "rocomaex_model/Command.hpp"
+
 namespace rocoma_example {
 
 class RocomaExample: public any_node::Node {
@@ -17,7 +20,7 @@ public:
   virtual bool update(const any_worker::WorkerEvent& event);
 
  private:
-  rocoma_ros::ControllerManagerRos controllerManager_;
+  rocoma_ros::ControllerManagerRos<rocomaex_model::State, rocomaex_model::Command> controllerManager_;
 };
 
 }
