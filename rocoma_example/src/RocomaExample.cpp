@@ -8,9 +8,9 @@
 namespace rocoma_example {
 
 RocomaExample::RocomaExample(NodeHandlePtr nodeHandle):
-        any_node::Node(nodeHandle),
-        controllerManager_(*nodeHandle,"rocomaex_model::State",
-        "rocomaex_model::Command")
+            any_node::Node(nodeHandle),
+            controllerManager_(*nodeHandle,"rocomaex_model::State",
+                               "rocomaex_model::Command")
 {
 }
 
@@ -26,13 +26,13 @@ void RocomaExample::init()
   std::shared_ptr<boost::shared_mutex> mutexCommand(new boost::shared_mutex());
   std::shared_ptr<any_worker::WorkerManager> workerManager(new any_worker::WorkerManager());
 
-  std::vector<std::string> controllerNames {"Controller1Plugin", "Controller2Plugin", "Controller3Plugin"};
-  std::vector<std::string> emergencyControllerNames {"EmergencyController1Plugin", "EmergencyController2Plugin"};
+  std::vector< std::pair<std::string, std::string> > controllerNameMap = {  {"Controller1Plugin", "EmergencyController1Plugin"},
+                                                                            {"Controller2Plugin", "EmergencyController2Plugin"},
+                                                                            {"Controller1Plugin", "EmergencyController1Plugin"} };
   std::string failproofControllerName {"FailproofController1Plugin"};
 
   controllerManager_.setupControllers(failproofControllerName,
-                                      emergencyControllerNames,
-                                      controllerNames,
+                                      controllerNameMap,
                                       state,
                                       command,
                                       mutexState,
