@@ -7,7 +7,7 @@
 
 int main(int argc, char **argv)
 {
-  any_node::Nodewrap<rocoma_example::RocomaExample> node(argc, argv, "rocoma_example", 1, true, 1);
+  any_node::Nodewrap<rocoma_example::RocomaExample> node(argc, argv, "rocoma_example", 1, true, 0.1);
   node.execute();
   return 0;
 }

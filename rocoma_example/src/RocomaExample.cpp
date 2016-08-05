@@ -20,11 +20,14 @@ RocomaExample::~RocomaExample()
 
 void RocomaExample::init()
 {
+  MELO_WARN("INIT!");
+
   std::shared_ptr<rocomaex_model::State> state(new rocomaex_model::State());
   std::shared_ptr<rocomaex_model::Command> command(new rocomaex_model::Command());
   std::shared_ptr<boost::shared_mutex> mutexState(new boost::shared_mutex());
   std::shared_ptr<boost::shared_mutex> mutexCommand(new boost::shared_mutex());
   std::shared_ptr<any_worker::WorkerManager> workerManager(new any_worker::WorkerManager());
+
 
   std::vector< std::pair<std::string, std::string> > controllerNameMap = {  {"Controller1Plugin", "EmergencyController1Plugin"},
                                                                             {"Controller2Plugin", "EmergencyController2Plugin"},
@@ -47,7 +50,6 @@ void RocomaExample::cleanup()
 
 bool RocomaExample::update(const any_worker::WorkerEvent& event)
 {
-  MELO_WARN("UPDATING!");
   controllerManager_.updateController();
   return true;
 }
