@@ -28,10 +28,10 @@ void RocomaExample::init()
   std::shared_ptr<boost::shared_mutex> mutexCommand(new boost::shared_mutex());
   std::shared_ptr<any_worker::WorkerManager> workerManager(new any_worker::WorkerManager());
 
-
-  std::vector< std::pair<std::string, std::string> > controllerNameMap = {  {"Controller1Plugin", "EmergencyController1Plugin"},
-                                                                            {"Controller2Plugin", "EmergencyController2Plugin"},
-                                                                            {"Controller1Plugin", "EmergencyController1Plugin"} };
+  using COptions = rocoma_ros::ControllerManagerRos<rocomaex_model::State, rocomaex_model::Command>::ControllerOptions;
+  std::vector< COptions > controllerNameMap = {  COptions{"Controller1Plugin", "EmergencyController1Plugin",false, false},
+                                                 COptions{"Controller2Plugin", "EmergencyController2Plugin", false, false},
+                                                 COptions{"ControllerRos1Plugin", "EmergencyController1Plugin", true, false} };
   std::string failproofControllerName {"FailproofController1Plugin"};
 
   controllerManager_.setupControllers(failproofControllerName,
@@ -39,8 +39,7 @@ void RocomaExample::init()
                                       state,
                                       command,
                                       mutexState,
-                                      mutexCommand,
-                                      workerManager);
+                                      mutexCommand);
 
 }
 
