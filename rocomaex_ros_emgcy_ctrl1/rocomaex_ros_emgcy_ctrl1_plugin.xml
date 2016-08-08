@@ -1,0 +1,8 @@
+<!-- The plugin description has to be created for every new controller package. -->
+<!-- type: Exported name of the controller. (first entry in ROCOMA_EXPORT_CONTROLLER()) -->
+<!-- base_class_type: rocoma_plugin::ControllerPluginInterface<rocomaex_model::State, rocomaex_model::Command> -->
+<!-- 				  make sure that the state and command type match those of ROCOMA_EXPORT_CONTROLLER()-->
+<library path="lib/librocomaex_ros_emgcy_ctrl1">
+  <class type="EmergencyControllerRos1Plugin" base_class_type="rocoma_plugin::EmergencyControllerRosPluginInterface<rocomaex_model::State, rocomaex_model::Command>">
+  </class>
+</library>
