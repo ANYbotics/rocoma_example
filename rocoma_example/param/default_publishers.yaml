@@ -1,0 +1,5 @@
+publishers:
+  m545_actuator_commands:
+    topic: /m545_actuator_commands
+    queue_size: 100
+    latch: false

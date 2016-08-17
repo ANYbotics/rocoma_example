@@ -1,0 +1,8 @@
+subscribers:
+  m545_state: 
+    topic: /m545_state
+    queue_size: 100
+  m545_joystick:
+    topic: /m545_joystick
+    queue_size: 100
+

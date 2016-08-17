@@ -38,17 +38,18 @@
 #include <pluginlib/class_list_macros.h>
 
 // rocoma plugin
-#include "rocoma_plugin/interfaces/EmergencyControllerPluginInterface.hpp"
 #include "rocoma_plugin/plugins/EmergencyControllerPlugin.hpp"
+#include "rocoma_plugin/plugins/ControllerPlugin.hpp"
 
 /**
  * Helper macro that wraps pluginlib's PLUGINLIB_EXPORT_CLASS(). Needed because of complicated template syntax.
  * @param Name of the controller plugin, also name of derived class in plugin xml file
- * @param Type of the controller the plugin should be registered for (this controller)
  * @param State class the controller is templated on
  * @param Command class the controller is templated on
+ * @param Type of the controller the plugin should be registered for (this controller)
  */
-ROCOMA_EXPORT_EMERGENCY_CONTROLLER(EmergencyController2Plugin, rocomaex_emgcy_ctrl2::EmergencyController2, rocomaex_model::State, rocomaex_model::Command)
+ROCOMA_EXPORT_EMERGENCY_CONTROLLER(EmergencyController2Plugin, rocomaex_model::State, rocomaex_model::Command, rocomaex_emgcy_ctrl2::EmergencyController2)
+ROCOMA_EXPORT_CONTROLLER(EmergencyController2Plugin, rocomaex_model::State, rocomaex_model::Command, rocomaex_emgcy_ctrl2::EmergencyController2)
 
 namespace rocomaex_emgcy_ctrl2 {
 

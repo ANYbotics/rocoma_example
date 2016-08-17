@@ -5,4 +5,6 @@
 <library path="lib/librocomaex_emgcy_ctrl2">
   <class type="EmergencyController2Plugin" base_class_type="rocoma_plugin::EmergencyControllerPluginInterface<rocomaex_model::State, rocomaex_model::Command>">
   </class>
+  <class type="EmergencyController2Plugin" base_class_type="rocoma_plugin::ControllerPluginInterface<rocomaex_model::State, rocomaex_model::Command>">
+  </class>
 </library>

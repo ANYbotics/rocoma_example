@@ -31,24 +31,26 @@
  * @date    Jul, 2016
  */
 
-// rocomaex ctrl2
+// rocomaex ctrl
+#include "rocomaex_ctrl1/Controller1.hpp"
 #include "rocomaex_ctrl2/Controller2.hpp"
 
 // pluginlib
 #include <pluginlib/class_list_macros.h>
 
 // rocoma plugin
-#include "rocoma_plugin/interfaces/ControllerPluginInterface.hpp"
 #include "rocoma_plugin/plugins/ControllerPlugin.hpp"
+#include "rocoma_plugin/plugins/ControllerTuplePlugin.hpp"
 
 /**
  * Helper macro that wraps pluginlib's PLUGINLIB_EXPORT_CLASS(). Needed because of complicated template syntax.
  * @param Name of the controller plugin, also name of derived class in plugin xml file
- * @param Type of the controller the plugin should be registered for (this controller)
  * @param State class the controller is templated on
  * @param Command class the controller is templated on
+ * @param Type of the controller the plugin should be registered for (this controller)
  */
-ROCOMA_EXPORT_CONTROLLER(Controller2Plugin, rocomaex_ctrl2::Controller2, rocomaex_model::State, rocomaex_model::Command)
+ROCOMA_EXPORT_CONTROLLER(Controller2Plugin, rocomaex_model::State, rocomaex_model::Command, rocomaex_ctrl2::Controller2)
+ROCOMA_EXPORT_CONTROLLER_TUPLE(Controller3Plugin, rocomaex_model::State, rocomaex_model::Command, rocomaex_ctrl1::Controller1, rocomaex_ctrl2::Controller2)
 
 namespace rocomaex_ctrl2 {
 

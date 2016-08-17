@@ -44,11 +44,11 @@
 /**
  * Helper macro that wraps pluginlib's PLUGINLIB_EXPORT_CLASS(). Needed because of complicated template syntax.
  * @param Name of the controller plugin, also name of derived class in plugin xml file
- * @param Type of the controller the plugin should be registered for (this controller)
  * @param State class the controller is templated on
  * @param Command class the controller is templated on
+ * @param Type of the controller the plugin should be registered for (this controller)
  */
-ROCOMA_EXPORT_CONTROLLER(Controller1Plugin, rocomaex_ctrl1::Controller1, rocomaex_model::State, rocomaex_model::Command)
+ROCOMA_EXPORT_CONTROLLER(Controller1Plugin, rocomaex_model::State, rocomaex_model::Command, rocomaex_ctrl1::Controller1)
 
 namespace rocomaex_ctrl1 {
 
@@ -94,6 +94,7 @@ bool Controller1::cleanup()
 
 bool Controller1::stop()
 {
+  sleep(20);
   MELO_INFO_STREAM("Controller " << this->getName() << " is stopped!");
   return true;
 }

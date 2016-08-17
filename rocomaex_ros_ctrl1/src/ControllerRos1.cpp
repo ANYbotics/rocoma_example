@@ -44,11 +44,11 @@
 /**
  * Helper macro that wraps pluginlib's PLUGINLIB_EXPORT_CLASS(). Needed because of complicated template syntax.
  * @param Name of the controller plugin, also name of derived class in plugin xml file
- * @param Type of the controller the plugin should be registered for (this controller)
  * @param State class the controller is templated on
  * @param Command class the controller is templated on
+ * @param Type of the controller the plugin should be registered for (this controller)
  */
-ROCOMA_EXPORT_CONTROLLER_ROS(ControllerRos1Plugin, rocomaex_ros_ctrl1::ControllerRos1, rocomaex_model::State, rocomaex_model::Command)
+ROCOMA_EXPORT_CONTROLLER_ROS(ControllerRos1Plugin, rocomaex_model::State, rocomaex_model::Command, rocomaex_ros_ctrl1::ControllerRos1)
 
 namespace rocomaex_ros_ctrl1 {
 

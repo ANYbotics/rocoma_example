@@ -1,0 +1,16 @@
+servers:
+  switch_autonomous_controller:
+    service: switch_autonomous_controller
+  enable_autonomous_controller:
+    service: enable_autonomous_controller
+  disable_autonomous_controller:
+    service: disable_autonomous_controller
+  get_available_controllers:
+    service: get_available_controllers
+  emergency_stop:
+    service: emergency_stop
+    
+clients:
+  reset_state_estimator:
+    service: /state_estimator/reset
+    persistent: false
