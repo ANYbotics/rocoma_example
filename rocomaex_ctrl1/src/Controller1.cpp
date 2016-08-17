@@ -34,12 +34,8 @@
 // rocomaex ctrl1
 #include "rocomaex_ctrl1/Controller1.hpp"
 
-// pluginlib
-#include <pluginlib/class_list_macros.h>
-
 // rocoma plugin
-#include "rocoma_plugin/interfaces/ControllerPluginInterface.hpp"
-#include "rocoma_plugin/plugins/ControllerPlugin.hpp"
+#include "rocoma_plugin/rocoma_plugin.hpp"
 
 /**
  * Helper macro that wraps pluginlib's PLUGINLIB_EXPORT_CLASS(). Needed because of complicated template syntax.
@@ -55,7 +51,7 @@ namespace rocomaex_ctrl1 {
 Controller1::Controller1(): Base()
 {
   //IMPORTANT: initialize name in the constructor.
-  this->name_ = "Controller1";
+  this->setName(std::string{"Controller1"});
 }
 
 Controller1::~Controller1()

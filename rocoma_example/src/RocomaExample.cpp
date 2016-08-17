@@ -1,7 +1,6 @@
 #include "rocoma_example/RocomaExample.hpp"
 #include "rocomaex_model/State.hpp"
 #include "rocomaex_model/Command.hpp"
-#include "rocomaex_ctrl1/Controller1.hpp"
 
 #include "message_logger/message_logger.hpp"
 

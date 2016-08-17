@@ -34,12 +34,8 @@
 // rocomaex ctrl2
 #include "rocomaex_emgcy_ctrl2/EmergencyController2.hpp"
 
-// pluginlib
-#include <pluginlib/class_list_macros.h>
-
 // rocoma plugin
-#include "rocoma_plugin/plugins/EmergencyControllerPlugin.hpp"
-#include "rocoma_plugin/plugins/ControllerPlugin.hpp"
+#include "rocoma_plugin/rocoma_plugin.hpp"
 
 /**
  * Helper macro that wraps pluginlib's PLUGINLIB_EXPORT_CLASS(). Needed because of complicated template syntax.
@@ -56,7 +52,7 @@ namespace rocomaex_emgcy_ctrl2 {
 EmergencyController2::EmergencyController2(): Base()
 {
   //IMPORTANT: initialize name in the constructor.
-  this->name_ = "EmergencyController2";
+  this->setName(std::string{"EmergencyController2"});
 }
 
 EmergencyController2::~EmergencyController2()

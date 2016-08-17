@@ -6,13 +6,13 @@ find_package(catkin REQUIRED COMPONENTS
   rocoma_ros
   roco
   message_logger
-  rocomaex_ctrl1
+  rocomaex_model
 )
 
 catkin_package(
   INCLUDE_DIRS include
   LIBRARIES ${PROJECT_NAME}
-  CATKIN_DEPENDS any_node rocoma_ros roco message_logger rocomaex_ctrl1
+  CATKIN_DEPENDS any_node rocoma_ros roco message_logger rocomaex_model
   DEPENDS
 )
 

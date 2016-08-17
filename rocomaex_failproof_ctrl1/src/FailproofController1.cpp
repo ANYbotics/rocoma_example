@@ -34,11 +34,8 @@
 // rocomaex ctrl1
 #include "rocomaex_failproof_ctrl1/FailproofController1.hpp"
 
-// pluginlib
-#include <pluginlib/class_list_macros.h>
-
 // rocoma plugin
-#include "rocoma_plugin/plugins/FailproofControllerPlugin.hpp"
+#include "rocoma_plugin/rocoma_plugin.hpp"
 
 /**
  * Helper macro that wraps pluginlib's PLUGINLIB_EXPORT_CLASS(). Needed because of complicated template syntax.
@@ -54,7 +51,7 @@ namespace rocomaex_failproof_ctrl1 {
 FailproofController1::FailproofController1(): Base()
 {
   //IMPORTANT: initialize name in the constructor.
-  this->name_ = "FailproofController1";
+  this->setName(std::string{"FailproofController1"});
 }
 
 FailproofController1::~FailproofController1()

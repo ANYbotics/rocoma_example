@@ -34,11 +34,8 @@
 // rocomaex_ros_emgcy_ctrl1
 #include "rocomaex_ros_emgcy_ctrl1/EmergencyControllerRos1.hpp"
 
-// pluginlib
-#include <pluginlib/class_list_macros.h>
-
 // rocoma plugin
-#include "rocoma_plugin/plugins/EmergencyControllerRosPlugin.hpp"
+#include "rocoma_plugin/rocoma_plugin.hpp"
 
 /**
  * Helper macro that wraps pluginlib's PLUGINLIB_EXPORT_CLASS(). Needed because of complicated template syntax.
@@ -54,7 +51,7 @@ namespace rocomaex_ros_emgcy_ctrl1 {
 EmergencyControllerRos1::EmergencyControllerRos1(): Base()
 {
   //IMPORTANT: initialize name in the constructor.
-  this->name_ = "EmergencyControllerRos1";
+  this->setName(std::string{"EmergencyControllerRos1"});
 }
 
 EmergencyControllerRos1::~EmergencyControllerRos1()
