@@ -1,43 +1,68 @@
 cmake_minimum_required(VERSION 2.8.3)
 project(rocoma_example)
 
+find_package(Boost REQUIRED)
+
+## Find catkin
 find_package(catkin REQUIRED COMPONENTS
-  any_node
-  rocoma_ros
-  roco
   message_logger
+  roco
+  rocoma
   rocomaex_model
+  rocomaex_ctrl1
+  rocomaex_ctrl2
+  rocomaex_emgcy_ctrl1
+  rocomaex_emgcy_ctrl2
+  rocomaex_failproof_ctrl1
 )
+
+## Catkin package configuration
 
 catkin_package(
   INCLUDE_DIRS include
   LIBRARIES ${PROJECT_NAME}
-  CATKIN_DEPENDS any_node rocoma_ros roco message_logger rocomaex_model
-  DEPENDS
+  CATKIN_DEPENDS 
+    message_logger 
+    roco 
+    rocoma 
+    rocomaex_model
+    rocomaex_ctrl1
+  	rocomaex_ctrl2
+  	rocomaex_emgcy_ctrl1
+  	rocomaex_emgcy_ctrl2
+  	rocomaex_failproof_ctrl1
+  DEPENDS Boost
 )
 
-###########
-## Build ##
-###########
+## Build
+
+add_definitions(-std=c++11)
+
 include_directories(
   include
   ${catkin_INCLUDE_DIRS}
+  ${Boost_INCLUDE_DIRS}
 )
 
+# Library
 add_library(${PROJECT_NAME}
   src/RocomaExample.cpp
 )
 
 add_dependencies(${PROJECT_NAME} ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+
 target_link_libraries(${PROJECT_NAME}
   ${catkin_LIBRARIES}
+  ${Boost_LIBRARIES}
 )
 
-# Declare a C++ executable
-add_executable(${PROJECT_NAME}_node src/${PROJECT_NAME}_node.cpp)
+# Executable
+add_executable(${PROJECT_NAME}_exec src/${PROJECT_NAME}.cpp)
 
-add_dependencies(${PROJECT_NAME}_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
-target_link_libraries(${PROJECT_NAME}_node
+add_dependencies(${PROJECT_NAME}_exec ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+
+target_link_libraries(${PROJECT_NAME}_exec
   ${PROJECT_NAME}
   ${catkin_LIBRARIES}
+  ${Boost_LIBRARIES}
 )
