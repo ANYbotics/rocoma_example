@@ -17,18 +17,45 @@ namespace rocoma_example {
 
 class RocomaExample{
 public:
+
+  //! Constructor
 	RocomaExample(const double timestep);
+
+	//! Destructor
 	virtual ~RocomaExample();
 
+	//! Initialize the example
 	virtual void init();
+
+	//! Update the example
+	virtual void update();
+
+	//! Cleanup the example
 	virtual void cleanup();
-	virtual bool update();
+
+	//! Switch to walk
+	virtual void walk();
+
+	//! Emergency stop
+	virtual void emergencyStop();
 
 private:
+	//! Time step determines update frequency
+	double timeStep_;
+
+	//! Controller manager
 	rocoma::ControllerManager controllerManager_;
+
+	//! Robot state
 	std::shared_ptr<rocomaex_model::State> state_;
+
+	//! Actuator commands
 	std::shared_ptr<rocomaex_model::Command> command_;
+
+	//! Mutex for robot state
 	std::shared_ptr<boost::shared_mutex> mutexState_;
+
+	//! Mutex for actuator commands
 	std::shared_ptr<boost::shared_mutex> mutexCommand_;
 };
 

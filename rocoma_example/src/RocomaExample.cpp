@@ -20,7 +20,8 @@
 namespace rocoma_example {
 
 RocomaExample::RocomaExample(const double timeStep):
-      controllerManager_(timeStep),
+      timeStep_(timeStep),
+      controllerManager_(),
 			state_(new rocomaex_model::State()),
 			command_(new rocomaex_model::Command()),
 			mutexState_(new boost::shared_mutex()),
@@ -118,28 +119,49 @@ void RocomaExample::init()
 
   // ---
 
-  //! Initialize Controller Manager
-  controllerManager_.setIsRealRobot(false);
-  controllerManager_.setTimestep(1);
+  /*** Initialize controller manager. If the default constructor of the manager was called,
+   *   a sepereate init function has to be called in order to initialize the manager. This has
+   *   to be done before adding controllers to the manager.
+   */
+  rocoma::ControllerManagerOptions managerOptions;
+  managerOptions.isRealRobot = false;
+  managerOptions.timeStep = timeStep_;
+  controllerManager_.init(managerOptions);
 
-  // Make pairs
+  /*** Now the controllers can be added to the manager. Controllers must have unique names.
+   *   However, multiple instances of the same controller with a different name can be added.
+   *   Emergency controllers can be shared among different controllers. Only one fail-proof controller
+   *   can be added. Use std::move() to transfer the ownership to the controllermanager.
+   */
   controllerManager_.setFailproofController(std::move(freeze));
   controllerManager_.addControllerPair(std::move(walk), std::move(stand));
   controllerManager_.addControllerPair(std::move(grasp), std::move(arm2Default));
   controllerManager_.addControllerPair(std::move(graspAndWalk), nullptr);
   controllerManager_.addControllerPairWithExistingEmergencyController(std::move(graspAndStand), "ArmDefault");
 
+  //! After the move operation all controllers are invalidated and set to the nullptr.
+}
+
+void RocomaExample::update()
+{
+  //! Advance the controller manager with the given timestep.
+  controllerManager_.updateController();
 }
 
 void RocomaExample::cleanup()
 {
+  //! When done clean up the controller manager.
   controllerManager_.cleanup();
 }
 
-bool RocomaExample::update()
+void RocomaExample::walk()
 {
-  controllerManager_.updateController();
-  return true;
+  controllerManager_.switchController("Walk");
+}
+
+void RocomaExample::emergencyStop()
+{
+  controllerManager_.emergencyStop();
 }
 
 }

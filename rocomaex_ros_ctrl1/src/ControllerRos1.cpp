@@ -72,7 +72,7 @@ bool ControllerRos1::initialize(double dt)
 
 bool ControllerRos1::advance(double dt)
 {
-  MELO_INFO_STREAM("Controller " << this->getName() << " is advanced!");
+  MELO_INFO_THROTTLE_STREAM(1.0, "Controller " << this->getName() << " is advanced!");
   return true;
 }
 

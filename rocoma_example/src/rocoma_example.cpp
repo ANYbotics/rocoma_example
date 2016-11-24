@@ -27,11 +27,37 @@ int main(int argc, char **argv)
 
   // update controller with given timestep
   boost::asio::io_service io;
-  while(true) {
+  unsigned int i = 0;
+
+  while(i < (10/dt)) {
     boost::asio::deadline_timer t(io, boost::posix_time::milliseconds(dt*1000));
+
+    // Switch to walk after a second
+    if(i == static_cast<unsigned int>(1/dt)) {
+      highlevelController.walk();
+    }
+
+    // Call emergency stop after 4 seconds
+    if(i == static_cast<unsigned int>(4/dt)) {
+      highlevelController.emergencyStop();
+    }
+
+    // Call second emergency stop after 6 seconds
+    if(i == static_cast<unsigned int>(6/dt)) {
+      highlevelController.emergencyStop();
+    }
+
+    // Update controller
     highlevelController.update();
+
+    // Wait for timer
     t.wait();
+
+    // Iterate
+    i++;
   }
+
+  highlevelController.cleanup();
 
   return 0;
 

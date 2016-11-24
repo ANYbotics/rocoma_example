@@ -30,7 +30,7 @@ class Command: public roco::CommandInterface {
   }
 
   bool limitCommand() {
-    MELO_INFO("[rocoma_example::Command]: Limiting Command");
+    MELO_INFO_THROTTLE_STREAM(1.0, "[rocoma_example::Command]: Limiting Command");
     return true;
   }
 
