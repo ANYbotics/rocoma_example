@@ -7,4 +7,6 @@
   </class>
   <class type="Controller3Plugin" base_class_type="rocoma_plugin::ControllerPluginInterface<rocomaex_model::State, rocomaex_model::Command>">
   </class>
+  <class type="Controller4Plugin" base_class_type="rocoma_plugin::ControllerPluginInterface<rocomaex_model::State, rocomaex_model::Command>">
+  </class>
 </library>

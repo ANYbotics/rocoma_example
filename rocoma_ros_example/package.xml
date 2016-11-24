@@ -12,11 +12,13 @@
   <depend>rocoma_ros</depend>
   <depend>roco</depend>
   <depend>message_logger</depend>
-  <depend>rocomaex_ros_ctrl1</depend>
-  <depend>rocomaex_ros_emgcy_ctrl1</depend>
+  <depend>rocomaex_model</depend>
+  <depend>rocomaex_failproof_ctrl1</depend>
   <depend>rocomaex_emgcy_ctrl1</depend>
   <depend>rocomaex_emgcy_ctrl2</depend>
-  <depend>rocomaex_failproof_ctrl1</depend>
-  <depend>rocomaex_model</depend>
-
+  <depend>rocomaex_ros_emgcy_ctrl1</depend>
+  <depend>rocomaex_ctrl1</depend>
+  <depend>rocomaex_ctrl2</depend>
+  <depend>rocomaex_ros_ctrl1</depend>
+  
 </package>

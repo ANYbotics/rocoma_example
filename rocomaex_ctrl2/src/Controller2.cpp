@@ -34,6 +34,7 @@
 // rocomaex ctrl
 #include "rocomaex_ctrl1/Controller1.hpp"
 #include "rocomaex_ctrl2/Controller2.hpp"
+#include "rocomaex_emgcy_ctrl1/EmergencyController1.hpp"
 
 // rocoma plugin
 #include "rocoma_plugin/rocoma_plugin.hpp"
@@ -48,6 +49,8 @@
 ROCOMA_EXPORT_CONTROLLER(Controller2Plugin, rocomaex_model::State, rocomaex_model::Command, rocomaex_ctrl2::Controller2)
 
 ROCOMA_EXPORT_CONTROLLER_TUPLE(Controller3Plugin, rocomaex_model::State, rocomaex_model::Command, rocomaex_ctrl1::Controller1, rocomaex_ctrl2::Controller2)
+
+ROCOMA_EXPORT_CONTROLLER_TUPLE(Controller4Plugin, rocomaex_model::State, rocomaex_model::Command, rocomaex_emgcy_ctrl1::EmergencyController1, rocomaex_ctrl2::Controller2)
 
 namespace rocomaex_ctrl2 {
 
