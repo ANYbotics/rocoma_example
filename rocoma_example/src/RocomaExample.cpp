@@ -61,7 +61,7 @@ void RocomaExample::init()
   using GraspAndStandCtrl = rocoma::ControllerAdapter< GraspAndStandTuple, rocomaex_model::State, rocomaex_model::Command >;
 
   /*** Controllers usually have a default name, use setName to override the default name. The same holds for the parameter
-   *   path. The path is an absolute path or relative path to the current directory at execution time.
+   *   path (set to non-sense in this example). The path is an absolute path or relative path to the current directory at execution time.
    *   Since the controller manager only knows the controller by it's interface and we are using the roco::Controller class
    *   in all of our controllers, we have to specify state and command and their corresponding mutexes before adding the
    *   controller to the manager.
@@ -156,11 +156,13 @@ void RocomaExample::cleanup()
 
 void RocomaExample::walk()
 {
+  //! Switch to the walking controller
   controllerManager_.switchController("Walk");
 }
 
 void RocomaExample::emergencyStop()
 {
+  //! Trigger an emergency stop
   controllerManager_.emergencyStop();
 }
 

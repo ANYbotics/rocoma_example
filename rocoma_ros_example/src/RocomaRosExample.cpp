@@ -1,19 +1,20 @@
+// rocoma ros example
 #include "rocoma_ros_example/RocomaRosExample.hpp"
-#include "rocomaex_model/State.hpp"
-#include "rocomaex_model/Command.hpp"
 
+// message logger
 #include "message_logger/message_logger.hpp"
 
 namespace rocoma_ros_example {
 
 RocomaRosExample::RocomaRosExample(NodeHandlePtr nodeHandle):
-          any_node::Node(nodeHandle),
-          controllerManager_("rocomaex_model::State",
-                             "rocomaex_model::Command"),
-                             state_(new rocomaex_model::State()),
-                             command_(new rocomaex_model::Command()),
-                             mutexState_(new boost::shared_mutex()),
-                             mutexCommand_(new boost::shared_mutex())
+     any_node::Node(nodeHandle),
+     timeStep_(0.01),
+     controllerManager_("rocomaex_model::State",
+                         "rocomaex_model::Command"),
+     state_(new rocomaex_model::State()),
+     command_(new rocomaex_model::Command()),
+     mutexState_(new boost::shared_mutex()),
+     mutexCommand_(new boost::shared_mutex())
 {
 }
 
@@ -37,7 +38,7 @@ void RocomaRosExample::init()
    *   to be done before adding controllers to the manager.
    */
   rocoma_ros::ControllerManagerRosOptions managerOptions;
-  managerOptions.timeStep = 1.0;
+  managerOptions.timeStep = timeStep_;
   managerOptions.isRealRobot = false;
   managerOptions.nodeHandle = this->getNodeHandle();
   controllerManager_.init(managerOptions);
@@ -46,53 +47,89 @@ void RocomaRosExample::init()
   bool setupControllersInCode = true;
 
   if(setupControllersInCode) {
-    //! Add controllers pairs
+    //! Add controller pairs in code.
 
-    //! ControllerRosPlugin1 is the ros implementation of Controller1 -> the normal walk controller from rocoma_example.
+    //! The fail-proof controller is added by the plugin name
+    std::string failproofControllerPluginName = "FailproofController1Plugin";
+
+    //! --- Setup controller for walking, recovers to a standing position.
     rocoma_ros::ManagedControllerOptionsPair WalkToStand;
+
+    /*** Walk controller (ros implementation)
+     *   ControllerRos1Plugin is the ros implementation of Controller1Plugin. (see rocoma_example)
+     */
     WalkToStand.first.pluginName_ = "ControllerRos1Plugin";
     WalkToStand.first.name_ = "WalkRos";
     WalkToStand.first.isRos_ = true;
     WalkToStand.first.parameterPath_ = "param/walk.xml";
 
+    //! Stand controller
     WalkToStand.second.pluginName_ = "EmergencyController1Plugin";
     WalkToStand.second.name_ = "Stand";
     WalkToStand.second.isRos_ = false;
     WalkToStand.second.parameterPath_ = "param/stand.xml";
 
-    //! EmergencyControllerRos1Plugin is the ros implementation of EmergencyController1 -> the arm default controller from rocoma_example.
+    //! ---
+
+
+    //! --- Setup controller grasps and recovers to arm default position.
     rocoma_ros::ManagedControllerOptionsPair GraspToArmDefault;
+
+    //! Grasp controller
     GraspToArmDefault.first.pluginName_ = "Controller2Plugin";
     GraspToArmDefault.first.name_ = "Grasp";
     GraspToArmDefault.first.isRos_ = false;
     GraspToArmDefault.first.parameterPath_ = "/home/user/parameters/grasp.txt";
 
+    /*** Move arm to default controller (ros implementation)
+     *   EmergencyControllerRos1Plugin is the ros implementation of EmergencyControllerPlugin2. (see rocoma_example)
+     */
     GraspToArmDefault.second.pluginName_ = "EmergencyControllerRos1Plugin";
     GraspToArmDefault.second.name_ = "ArmDefaultRos";
     GraspToArmDefault.second.isRos_ = true;
     GraspToArmDefault.second.parameterPath_ = "armdefault.xml";
 
+    //! ---
+
+
+    //! --- Setup controller thats walks and grasps, without recovery behavior.
     rocoma_ros::ManagedControllerOptionsPair WalkAndGrasp;
+
+    //! Walking controller
     WalkAndGrasp.first.pluginName_ = "Controller3Plugin";
     WalkAndGrasp.first.name_ = "WalkAndGrasp";
     WalkAndGrasp.first.isRos_ = false;
     WalkAndGrasp.first.parameterPath_ = "";
-    // No emergency controller can not recover
 
+    //! No emergency controller -> use the failproof controller
+
+    //! ---
+
+
+    //! --- Setup controller thats stands and grasps, recovers to arm default.
     rocoma_ros::ManagedControllerOptionsPair StandAndGraspToArmDefault;
+
+    //! Stand and Grasp controller
     StandAndGraspToArmDefault.first.pluginName_ = "Controller4Plugin";
     StandAndGraspToArmDefault.first.name_ = "StandAndGrasp";
     StandAndGraspToArmDefault.first.isRos_ = false;
     StandAndGraspToArmDefault.first.parameterPath_ = "";
 
+    /*** Move arm to default controller (ros implementation)
+     *   EmergencyControllerRos1Plugin is the ros implementation of EmergencyControllerPlugin2. (see rocoma_example)
+     */
     StandAndGraspToArmDefault.second.pluginName_ = "EmergencyControllerRos1Plugin";
     StandAndGraspToArmDefault.second.name_ = "ArmDefaultRos";
     StandAndGraspToArmDefault.second.isRos_ = true;
     StandAndGraspToArmDefault.second.parameterPath_ = "armdefault.xml";
 
+    //! ---
+
+    // Build a vector from the defined controller pairs.
     std::vector<rocoma_ros::ManagedControllerOptionsPair> controllerPairs {WalkToStand, GraspToArmDefault, WalkAndGrasp, StandAndGraspToArmDefault};
 
-    controllerManager_.setupControllers("FailproofController1Plugin", controllerPairs, state_, command_, mutexState_, mutexCommand_);
+    // Setup the controllers
+    controllerManager_.setupControllers(failproofControllerPluginName, controllerPairs, state_, command_, mutexState_, mutexCommand_);
   }
 
   else {

@@ -27,7 +27,7 @@ public:
 	//! Initialize the example
 	virtual void init();
 
-	//! Update the example
+  //! Update the example
 	virtual void update();
 
 	//! Cleanup the example
