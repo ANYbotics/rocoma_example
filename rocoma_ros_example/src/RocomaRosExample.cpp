@@ -16,6 +16,49 @@ RocomaRosExample::RocomaRosExample(NodeHandlePtr nodeHandle):
      mutexState_(new boost::shared_mutex()),
      mutexCommand_(new boost::shared_mutex())
 {
+  // Populate data
+  myLogFloat_ = 1.2;
+  myLogDouble_ = 1.0;
+  myLogInt_ = 99999;
+  myLogShort_ = 3;
+  myLogLong_ = 39;
+  myLogChar_ = 'b';
+  myLogBool_ = false;
+  myLogTimestamp_ = signal_logger::TimestampPair(100, 23);
+
+  myLogVector3d_ = Eigen::Vector3d(1.0,2.9,3.3);
+
+  myLogMatrixXf_.resize(1,2);
+  myLogMatrixXf_ << 23.4, 88.8;
+
+  myLogMatrixXd_.resize(2,1);
+  myLogMatrixXd_ << 4.2, 43.1;
+
+  myLogMatrixXi_.resize(3,3);
+  myLogMatrixXi_ << 1,2,3,
+                    4,5,6,
+                    7,8,9;
+  myLogMatrixXs_.resize(2,2);
+  myLogMatrixXs_ << 10,21,
+                    34,25;
+  myLogMatrixXl_.resize(1,3);
+  myLogMatrixXl_ << 29 ,44, 12;
+
+  myLogMatrixXc_.resize(1,1);
+  myLogMatrixXc_ << 'u';
+
+  myLogMatrixXUc_.resize(4,1);
+  myLogMatrixXUc_ << 'o','k','o', 'k';
+
+  myLogMatrixXb_.resize(1,2);
+  myLogMatrixXb_<< true, false;
+
+  myLogPosition_ = kindr::Position3D(1.3,3.2,5.5);
+  myLogQuaternion_ = kindr::RotationQuaternionPD(1.0,0.0,0.0,0.0);
+  myLogEulerAngles_ = kindr::EulerAnglesZyxPD(16.4,3.4,35);
+  myTestEnum_ = myTestEnum::NR2;
+  myLogAngularVelocity_ = kindr::LocalAngularVelocityPD(1.3,3.2,5.5);
+}
 }
 
 RocomaRosExample::~RocomaRosExample()
@@ -139,6 +182,62 @@ void RocomaRosExample::init()
       controllerManager_.setupControllersFromParameterServer( state_, command_, mutexState_, mutexCommand_);
   }
 
+
+  // Add variables to std logger
+  signal_logger::setSignalLoggerRos(&getNodeHandle());
+  signal_logger::logger->initLogger(500, 5, "logging.yaml");
+
+
+  signal_logger::add(myLogFloat_, "myFloat", "primitive_types", "-");
+  signal_logger::add(myLogDouble_, "myDouble", "primitive_types", "-");
+  signal_logger::add(myLogInt_, "myInt", "primitive_types", "-");
+  signal_logger::add(myLogShort_, "myShort", "primitive_types", "-");
+  signal_logger::add(myLogLong_, "myLong", "primitive_types", "-");
+  signal_logger::add(myLogChar_, "myChar", "primitive_types", "-");
+  signal_logger::add(myLogBool_, "myBool", "primitive_types", "-");
+  signal_logger::add(myLogTimestamp_, "myTime", "primitive_types", "s/ns");
+
+  signal_logger::add(myLogVector3d_, "myVector3", "eigen_types", "-");
+  signal_logger::add(myLogMatrixXf_, "myFloatMatrix", "eigen_types", "-");
+  signal_logger::add(myLogMatrixXd_, "myDoubleMatrix", "eigen_types", "-");
+  signal_logger::add(myLogMatrixXs_, "myShortMatrix", "eigen_types", "-");
+  signal_logger::add(myLogMatrixXi_, "myIntMatrix", "eigen_types", "-");
+  signal_logger::add(myLogMatrixXl_, "myLongMatrix", "eigen_types", "-");
+  signal_logger::add(myLogMatrixXc_, "myCharMatrix", "eigen_types", "-");
+  signal_logger::add(myLogMatrixXUc_, "myUnsignedCharMatrix", "eigen_types", "-");
+  signal_logger::add(myLogMatrixXb_, "myBoolMatrix", "eigen_types", "-");
+
+  signal_logger::add(myLogPosition_, "myPosition", "kindr_types", "m");
+  signal_logger::add(myLogQuaternion_, "myQuaternion", "kindr_types", "-");
+  signal_logger::add(myLogEulerAngles_, "myEulerAngles", "kindr_types", "rad");
+  signal_logger::add(myLogAngularVelocity_, "myAngularVelocity", "kindr_types", "rad/s");
+  signal_logger::add(myLogAngleAxis_, "myAngleAxis", "kindr_types", "-");
+  signal_logger::add(myLogRotationMatrix_, "myRotationMatrix", "kindr_types", "-");
+  signal_logger::add(myLogRotationVector_, "myRotationVector", "kindr_types", "-");
+  signal_logger::add(myLogLinearVelocity_, "myLinearVelocity", "kindr_types", "m/s");
+  signal_logger::add(myLogLinearAcceleration_, "myLinearAcceleration", "kindr_types", "m/(s*s)");
+  signal_logger::add(myLogAngularAcceleration_, "myAngularAcceleration", "kindr_types", "rad/(s*s)");
+  signal_logger::add(myLogTorque_, "myTorque", "kindr_types", "Nm");
+  signal_logger::add(myLogKindrVector_, "myKindrVector", "kindr_types", "-");
+  signal_logger::add(myLogForce_, "myForce", "kindr_types", "N");
+  signal_logger::add(myStrangeSizedMatrix_, "myStrangesizedType", "eigen_types", "N");
+  signal_logger::add(myTestEnum_, "myEnum", "enum_types", "");
+
+
+  myLogKindrVectorAtPosition_.vectorFrame = "world";
+  myLogKindrVectorAtPosition_.positionFrame = "base";
+  signal_logger::add(myLogKindrVectorAtPosition_, "myKindrVectorAtPosition", "kindr_types", "-");
+
+  signal_logger::logger->updateLogger();
+  signal_logger::logger->startLogger();
+
+  // Publish data in different thread
+  any_worker::WorkerOptions options;
+  options.callback_ = std::bind(&RocomaExample::publishWorker, this, std::placeholders::_1);
+  options.name_ = "publishLoggerData";
+  options.timeStep_ = 0.05;
+  this->addWorker(options);
+
 }
 
 bool RocomaRosExample::update(const any_worker::WorkerEvent& event)
@@ -152,6 +251,16 @@ void RocomaRosExample::cleanup()
 {
   //! When done clean up the controller manager.
   controllerManager_.cleanup();
+}
+
+
+bool RocomaExample::saveLoggerData(std_srvs::TriggerRequest & req, std_srvs::TriggerResponse & res) {
+  signal_logger::logger->saveLoggerData();
+  return true;
+}
+
+bool RocomaExample::publishWorker(const any_worker::WorkerEvent& event) {
+  return signal_logger::logger->publishData();
 }
 
 }
