@@ -1,26 +1,62 @@
 #pragma once
 
-#include "any_node/Node.hpp"
-
-#include "rocoma_ros/ControllerManagerRos.hpp"
-
+// rocomaex model
 #include "rocomaex_model/State.hpp"
 #include "rocomaex_model/Command.hpp"
 
+// rocoma
+#include "rocoma/ControllerManager.hpp"
+
+// Boost
+#include <boost/thread.hpp>
+
+// Stl
+#include <memory>
+
 namespace rocoma_example {
 
-class RocomaExample: public any_node::Node {
+class RocomaExample{
 public:
-  RocomaExample() = delete;
-  RocomaExample(NodeHandlePtr nodeHandle);
-  ~RocomaExample();
 
-  virtual void init();
-  virtual void cleanup();
-  virtual bool update(const any_worker::WorkerEvent& event);
+  //! Constructor
+	RocomaExample(const double timestep);
 
- private:
-  rocoma_ros::ControllerManagerRos<rocomaex_model::State, rocomaex_model::Command> controllerManager_;
+	//! Destructor
+	virtual ~RocomaExample();
+
+	//! Initialize the example
+	virtual void init();
+
+  //! Update the example
+	virtual void update();
+
+	//! Cleanup the example
+	virtual void cleanup();
+
+	//! Switch to walk
+	virtual void walk();
+
+	//! Emergency stop
+	virtual void emergencyStop();
+
+private:
+	//! Time step determines update frequency
+	double timeStep_;
+
+	//! Controller manager
+	rocoma::ControllerManager controllerManager_;
+
+	//! Robot state
+	std::shared_ptr<rocomaex_model::State> state_;
+
+	//! Actuator commands
+	std::shared_ptr<rocomaex_model::Command> command_;
+
+	//! Mutex for robot state
+	std::shared_ptr<boost::shared_mutex> mutexState_;
+
+	//! Mutex for actuator commands
+	std::shared_ptr<boost::shared_mutex> mutexCommand_;
 };
 
 }

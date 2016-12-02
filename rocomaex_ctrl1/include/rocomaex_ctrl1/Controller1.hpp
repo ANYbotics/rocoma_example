@@ -62,6 +62,9 @@ class Controller1: virtual public roco::Controller<rocomaex_model::State, rocoma
   //! Destructor
   virtual ~Controller1();
 
+ protected:
+  bool printState(const roco::WorkerEvent& event);
+
   /** Adaptee Implementation
         NOTE: Adaptee functionality is hidden from the client
    */
@@ -73,6 +76,10 @@ class Controller1: virtual public roco::Controller<rocomaex_model::State, rocoma
   virtual bool cleanup();
   virtual bool stop();
   virtual bool preStop();
+
+ private:
+  roco::WorkerHandle printWorkerHandle_;
+
 
 };
 

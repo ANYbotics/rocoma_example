@@ -37,6 +37,9 @@
 // rocoma plugin
 #include "rocoma_plugin/rocoma_plugin.hpp"
 
+// Boost
+#include <boost/thread.hpp>
+
 /**
  * Helper macro that wraps pluginlib's PLUGINLIB_EXPORT_CLASS(). Needed because of complicated template syntax.
  * @param Name of the controller plugin, also name of derived class in plugin xml file
@@ -48,7 +51,8 @@ ROCOMA_EXPORT_CONTROLLER(Controller1Plugin, rocomaex_model::State, rocomaex_mode
 
 namespace rocomaex_ctrl1 {
 
-Controller1::Controller1(): Base()
+Controller1::Controller1(): Base(),
+    printWorkerHandle_()
 {
   //IMPORTANT: initialize name in the constructor.
   this->setName(std::string{"Controller1"});
@@ -56,6 +60,13 @@ Controller1::Controller1(): Base()
 
 Controller1::~Controller1()
 {
+}
+
+bool Controller1::printState(const roco::WorkerEvent& event) {
+  // Protect the state by the shared mutex
+  boost::lock_guard<boost::shared_mutex> guardState(getStateMutex());
+  MELO_INFO_STREAM("State: " << getState().getValue());
+  return true;
 }
 
 bool Controller1::create(double dt)
@@ -66,13 +77,35 @@ bool Controller1::create(double dt)
 
 bool Controller1::initialize(double dt)
 {
+  // You can acces the parameter path by getParameterPath()
+  MELO_INFO_STREAM("The parameter path of " << this->getName() << " is " << this->getParameterPath());
   MELO_INFO_STREAM("Controller " << this->getName() << " is initialized!");
+
+  /*** Roco/ Rocoma also features multithreading capabilities.
+   *   This worker displays the state.
+   */
+  roco::WorkerOptions publishWorkerOptions;
+  publishWorkerOptions.autostart_ = false;            // do not auto start
+  publishWorkerOptions.frequency_ = 10.0;             // publish with 10 Hz
+  publishWorkerOptions.name_ = "print_state_command"; // thread name
+  publishWorkerOptions.priority_ = 0;                 // priority
+  publishWorkerOptions.synchronous_ = false;
+  publishWorkerOptions.callback_ = boost::bind(&Controller1::printState, this, _1);
+  printWorkerHandle_ = addWorker(publishWorkerOptions);
+  startWorker(printWorkerHandle_);
+  //---
+
   return true;
 }
 
 bool Controller1::advance(double dt)
 {
-  MELO_INFO_STREAM("Controller " << this->getName() << " is advanced!");
+  /** You can get access the state and set a command accordingly.
+   */
+
+  // Here set the command to twice the state
+  getCommand().setValue(2*getState().getValue());
+  MELO_INFO_THROTTLE_STREAM(1.0, "Controller " << this->getName() << " is advanced!");
   return true;
 }
 

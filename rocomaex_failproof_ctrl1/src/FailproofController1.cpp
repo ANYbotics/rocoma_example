@@ -66,7 +66,7 @@ bool FailproofController1::create(double dt)
 
 void FailproofController1::advance(double dt)
 {
-  MELO_INFO_STREAM("Controller " << this->getName() << " is advanced!");
+  MELO_INFO_THROTTLE_STREAM(1.0, "Controller " << this->getName() << " is advanced!");
   return;
 }
 

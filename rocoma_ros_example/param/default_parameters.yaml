@@ -1,0 +1,50 @@
+controller_manager:
+  failproof_controller: "FailproofController1Plugin"
+
+  controller_pairs:
+    - controller_pair:
+        controller:
+          plugin_name:              "ControllerRos1Plugin"
+          name:                     "WalkRos"
+          is_ros:                   true
+          parameter_package:        "rocomaex_ctrl1"
+          parameter_path:           "param/walk.xml"
+        emergency_controller:
+          plugin_name:              "EmergencyController1Plugin"
+          name:                     "Stand"
+          is_ros:                   false
+          parameter_package:        "rocomaex_emgcy_ctrl1"
+          parameter_path:           "param/stand.yaml"
+    - controller_pair:
+        controller:
+          plugin_name:              "Controller2Plugin"
+          name:                     "Grasp"
+          is_ros:                   false
+          parameter_package:        ""
+          parameter_path:           "/home/user/parameters/grasp.txt"
+        emergency_controller:
+          plugin_name:              "EmergencyControllerRos1Plugin"
+          name:                     "ArmDefaultRos"
+          is_ros:                   true
+          parameter_package:        "rocomaex_emgcy_ctrl2"
+          parameter_path:           "armdefault.xml"
+    - controller_pair:
+        controller:
+          plugin_name:              "Controller3Plugin"
+          name:                     "WalkAndGrasp"
+          is_ros:                   false
+          parameter_package:        "rocomaex_ros_ctrl1"
+          parameter_path:           ""
+    - controller_pair:
+        controller:
+          plugin_name:              "Controller4Plugin"
+          name:                     "StandAndGrasp"
+          is_ros:                   false
+          parameter_package:        "rocomaex_ros_ctrl1"
+          parameter_path:           ""
+        emergency_controller:
+          plugin_name:              "EmergencyControllerRos1Plugin"
+          name:                     "ArmDefaultRos"
+          is_ros:                   true
+          parameter_package:        "rocomaex_emgcy_ctrl2"
+          parameter_path:           "armdefault.xml"

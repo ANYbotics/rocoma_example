@@ -8,6 +8,7 @@ find_package(catkin REQUIRED COMPONENTS
   message_logger
   rocomaex_model
   rocoma_plugin
+  rocomaex_emgcy_ctrl1
   rocomaex_ctrl1
 )
 
@@ -19,6 +20,7 @@ catkin_package(
     message_logger
     rocomaex_model
     rocoma_plugin
+    rocomaex_emgcy_ctrl1
     rocomaex_ctrl1
   DEPENDS
 )

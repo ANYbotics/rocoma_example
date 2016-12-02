@@ -19,7 +19,8 @@ class State: public roco::StateInterface {
 
  public:
 
-  State(): roco::StateInterface()
+  State(): roco::StateInterface(),
+            value_()
   {
 
   }
@@ -30,9 +31,16 @@ class State: public roco::StateInterface {
   }
 
   bool checkState() const{
-    MELO_INFO("[rocoma_example::State]: Checking State");
+    MELO_INFO_THROTTLE_STREAM(1.0, "[rocoma_example::State]: Checking State");
     return true;
   }
+
+  double getValue() const {
+    return value_;
+  }
+
+ private:
+  double value_;
 
 };
 

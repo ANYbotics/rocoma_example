@@ -34,8 +34,10 @@
 #pragma once
 
 // roco
-#include "roco/controllers/ControllerRos.hpp"
 #include "roco/controllers/adaptees/EmergencyControllerAdapteeInterface.hpp"
+
+// roco_ros
+#include "roco_ros/controllers/ControllerRos.hpp"
 
 // rocomaex model
 #include "rocomaex_model/State.hpp"
@@ -48,12 +50,12 @@ namespace rocomaex_ros_emgcy_ctrl1 {
 /**
  * IMPORTANT: Make sure to use virtual inheritance, prevents issues due to multiple inheritance
  */
-class EmergencyControllerRos1: virtual public roco::ControllerRos<rocomaex_model::State, rocomaex_model::Command>, public roco::EmergencyControllerAdapteeInterface
+class EmergencyControllerRos1: virtual public roco_ros::ControllerRos<rocomaex_model::State, rocomaex_model::Command>, public roco::EmergencyControllerAdapteeInterface
 {
 
  public:
   //! Convenience typedef for Base class
-  typedef roco::ControllerRos<rocomaex_model::State, rocomaex_model::Command> Base;
+  typedef roco_ros::ControllerRos<rocomaex_model::State, rocomaex_model::Command> Base;
 
  public:
   /** Default Constructor

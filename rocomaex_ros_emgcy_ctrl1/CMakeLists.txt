@@ -5,6 +5,7 @@ add_definitions(-std=c++11)
 
 find_package(catkin REQUIRED COMPONENTS
   roco
+  roco_ros
   message_logger
   rocomaex_model
   rocoma_plugin
@@ -15,6 +16,7 @@ catkin_package(
   LIBRARIES ${PROJECT_NAME}
   CATKIN_DEPENDS
     roco
+    roco_ros
     message_logger
     rocomaex_model
     rocoma_plugin

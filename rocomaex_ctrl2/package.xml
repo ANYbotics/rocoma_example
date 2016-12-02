@@ -13,7 +13,8 @@
   <depend>rocomaex_model</depend>
   <depend>rocoma_plugin</depend>
   <depend>rocomaex_ctrl1</depend>
-
+  <depend>rocomaex_emgcy_ctrl1</depend>
+  
   <!-- IMPORTANT: The xml file has to be imported here. -->
   <!-- All base classes are located in rocoma_plugin. -->
   <!-- When defining your own controller package just adapt the xml path of the plugin description. -->
