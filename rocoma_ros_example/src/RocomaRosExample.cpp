@@ -18,7 +18,7 @@ RocomaRosExample::RocomaRosExample(NodeHandlePtr nodeHandle):
 {
   // Populate data
   myLogFloat_ = 1.2;
-  myLogDouble_ = 1.0;
+  myLogDouble_ = 0.0;
   myLogInt_ = 99999;
   myLogShort_ = 3;
   myLogLong_ = 39;
@@ -58,8 +58,11 @@ RocomaRosExample::RocomaRosExample(NodeHandlePtr nodeHandle):
   myLogEulerAngles_ = kindr::EulerAnglesZyxPD(16.4,3.4,35);
   myTestEnum_ = myTestEnum::NR2;
   myLogAngularVelocity_ = kindr::LocalAngularVelocityPD(1.3,3.2,5.5);
+
+  clockPublisher_ = nodeHandle->advertise<rosgraph_msgs::Clock>("/clock", 100);
+  time_.clock = ros::Time(0, 0);
 }
-}
+
 
 RocomaRosExample::~RocomaRosExample()
 {
@@ -184,7 +187,7 @@ void RocomaRosExample::init()
 
 
   // Add variables to std logger
-  signal_logger::setSignalLoggerRos(&getNodeHandle());
+  signal_logger::setSignalLoggerRos(&getNodeHandle(), true);
   signal_logger::logger->initLogger(500, 5, "logging.yaml");
 
 
@@ -233,9 +236,9 @@ void RocomaRosExample::init()
 
   // Publish data in different thread
   any_worker::WorkerOptions options;
-  options.callback_ = std::bind(&RocomaExample::publishWorker, this, std::placeholders::_1);
+  options.callback_ = std::bind(&RocomaRosExample::publishWorker, this, std::placeholders::_1);
   options.name_ = "publishLoggerData";
-  options.timeStep_ = 0.05;
+  options.timeStep_ = 1;
   this->addWorker(options);
 
 }
@@ -244,6 +247,13 @@ bool RocomaRosExample::update(const any_worker::WorkerEvent& event)
 {
   //! Advance the controller manager.
   controllerManager_.updateController();
+  signal_logger::logger->collectLoggerData();
+
+  myLogDouble_ += 1;
+
+  time_.clock = time_.clock + ros::Duration(0.1);
+  clockPublisher_.publish(time_);
+
   return true;
 }
 
@@ -254,12 +264,12 @@ void RocomaRosExample::cleanup()
 }
 
 
-bool RocomaExample::saveLoggerData(std_srvs::TriggerRequest & req, std_srvs::TriggerResponse & res) {
+bool RocomaRosExample::saveLoggerData(std_srvs::TriggerRequest & req, std_srvs::TriggerResponse & res) {
   signal_logger::logger->saveLoggerData();
   return true;
 }
 
-bool RocomaExample::publishWorker(const any_worker::WorkerEvent& event) {
+bool RocomaRosExample::publishWorker(const any_worker::WorkerEvent& event) {
   return signal_logger::logger->publishData();
 }
 

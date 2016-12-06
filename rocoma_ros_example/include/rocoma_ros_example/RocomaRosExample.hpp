@@ -13,6 +13,7 @@
 // signal logger
 #include <signal_logger/signal_logger.hpp>
 
+#include <rosgraph_msgs/Clock.h>
 
 namespace rocoma_ros_example {
 
@@ -68,6 +69,10 @@ public:
 
   //! Mutex for actuator commands
   std::shared_ptr<boost::shared_mutex> mutexCommand_;
+
+  //! Clock publisher
+  ros::Publisher clockPublisher_;
+  rosgraph_msgs::Clock time_;
 
   // Primitive types
   float myLogFloat_;
