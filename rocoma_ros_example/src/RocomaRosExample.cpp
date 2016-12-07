@@ -28,8 +28,10 @@ RocomaRosExample::RocomaRosExample(NodeHandlePtr nodeHandle):
 
   myLogVector3d_ = Eigen::Vector3d(1.0,2.9,3.3);
 
-  myLogMatrixXf_.resize(1,2);
-  myLogMatrixXf_ << 23.4, 88.8;
+  myLogMatrixXf_.resize(3,2);
+  myLogMatrixXf_ << 0,0,
+                    0,0,
+                    0,0;
 
   myLogMatrixXd_.resize(2,1);
   myLogMatrixXd_ << 4.2, 43.1;
@@ -60,7 +62,7 @@ RocomaRosExample::RocomaRosExample(NodeHandlePtr nodeHandle):
   myLogAngularVelocity_ = kindr::LocalAngularVelocityPD(1.3,3.2,5.5);
 
   clockPublisher_ = nodeHandle->advertise<rosgraph_msgs::Clock>("/clock", 100);
-  time_.clock = ros::Time(0, 0);
+  time_.clock = ros::Time(0.0);
 }
 
 
@@ -250,7 +252,11 @@ bool RocomaRosExample::update(const any_worker::WorkerEvent& event)
   signal_logger::logger->collectLoggerData();
 
   myLogDouble_ += 1;
-
+  Eigen::MatrixXf summand(3,2);
+  summand << 1, 5,
+             150, 1000,
+             0.1, 33.33;
+  myLogMatrixXf_ += summand;
   time_.clock = time_.clock + ros::Duration(0.1);
   clockPublisher_.publish(time_);
 
