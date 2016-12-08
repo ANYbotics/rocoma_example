@@ -10,6 +10,8 @@
 #include "rocomaex_model/State.hpp"
 #include "rocomaex_model/Command.hpp"
 
+#include <parameter_handler/Parameter.hpp>
+
 namespace rocoma_ros_example {
 
 /** This example shows how to setup a controller manager ros. To interact with the manager use the ros services
@@ -53,6 +55,12 @@ public:
 
   //! Mutex for actuator commands
   std::shared_ptr<boost::shared_mutex> mutexCommand_;
+  
+  parameter_handler::Parameter<double> doubleParam_;
+  parameter_handler::Parameter<Eigen::Vector3d> vector3Param_;
+  parameter_handler::Parameter<Eigen::Matrix3d> matrix3Param_;
+  parameter_handler::Parameter<int> intParam_;
+  parameter_handler::Parameter<Eigen::Vector3i> intVector3Param_;
 };
 
 }

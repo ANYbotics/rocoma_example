@@ -4,6 +4,9 @@
 // message logger
 #include "message_logger/message_logger.hpp"
 
+#include <parameter_handler/parameter_handler.hpp>
+#include <parameter_handler_ros/ParameterHandlerRos.hpp>
+
 namespace rocoma_ros_example {
 
 RocomaRosExample::RocomaRosExample(NodeHandlePtr nodeHandle):
@@ -14,7 +17,12 @@ RocomaRosExample::RocomaRosExample(NodeHandlePtr nodeHandle):
      state_(new rocomaex_model::State()),
      command_(new rocomaex_model::Command()),
      mutexState_(new boost::shared_mutex()),
-     mutexCommand_(new boost::shared_mutex())
+     mutexCommand_(new boost::shared_mutex()),
+     doubleParam_ ("doubleParam",      500.0,  0.0,  2000.0),
+     vector3Param_ ("vector3Param",    Eigen::Vector3d{0.2,1.12,2.22},  Eigen::Vector3d{1.20,2.40,1.2340},  Eigen::Vector3d{100.9,50.2,200.2}),
+     matrix3Param_ ("matrix3Param", Eigen::Matrix3d::Zero(), Eigen::Matrix3d::Zero(), Eigen::Matrix3d::Constant(100)),
+     intParam_("intParam",0,0,20),
+     intVector3Param_("intVector",    Eigen::Vector3i{0,1,2},  Eigen::Vector3i{0,0,0},  Eigen::Vector3i{100,50,200})
 {
 }
 
@@ -139,10 +147,29 @@ void RocomaRosExample::init()
       controllerManager_.setupControllersFromParameterServer( state_, command_, mutexState_, mutexCommand_);
   }
 
+
+  //--- Configure parameter handler
+  parameter_handler::handler.reset(new parameter_handler_ros::ParameterHandlerRos());
+  parameter_handler_ros::ParameterHandlerRos* parameterHandlerRos = static_cast<parameter_handler_ros::ParameterHandlerRos*>(parameter_handler::handler.get());
+  parameterHandlerRos->setNodeHandle(this->getNodeHandle());
+  parameterHandlerRos->initializeServices();
+
+  parameter_handler::handler->addParam(doubleParam_);
+  parameter_handler::handler->addParam(vector3Param_);
+  parameter_handler::handler->addParam(matrix3Param_);
+  parameter_handler::handler->addParam(intParam_);
+  parameter_handler::handler->addParam(intVector3Param_);
+
 }
 
 bool RocomaRosExample::update(const any_worker::WorkerEvent& event)
 {
+  MELO_INFO_THROTTLE_STREAM(1.0, "Double: " << doubleParam_.getValue());
+  MELO_INFO_THROTTLE_STREAM(1.0, "Vector: " << vector3Param_.getValue()(0) << " " << vector3Param_.getValue()(1) << " " << vector3Param_.getValue()(2));
+  MELO_INFO_THROTTLE_STREAM(1.0, "M1: " << matrix3Param_.getValue()(0,0) << " " << matrix3Param_.getValue()(0,1) << " " << matrix3Param_.getValue()(0,2));
+  MELO_INFO_THROTTLE_STREAM(1.0, "M2: " << matrix3Param_.getValue()(1,0) << " " << matrix3Param_.getValue()(1,1) << " " << matrix3Param_.getValue()(1,2));
+  MELO_INFO_THROTTLE_STREAM(1.0, "M3: " << matrix3Param_.getValue()(2,0) << " " << matrix3Param_.getValue()(2,1) << " " << matrix3Param_.getValue()(2,2));
+
   //! Advance the controller manager.
   controllerManager_.updateController();
   return true;

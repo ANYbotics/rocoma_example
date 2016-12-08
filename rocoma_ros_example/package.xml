@@ -20,5 +20,7 @@
   <depend>rocomaex_ctrl1</depend>
   <depend>rocomaex_ctrl2</depend>
   <depend>rocomaex_ros_ctrl1</depend>
-  
+  <depend>parameter_handler</depend>
+  <depend>parameter_handler_ros</depend>
+
 </package>
