@@ -189,7 +189,7 @@ void RocomaRosExample::init()
 
 
   // Add variables to std logger
-  signal_logger::setSignalLoggerRos(&getNodeHandle(), true);
+  signal_logger::setSignalLoggerRos(&getNodeHandle());
   signal_logger::logger->initLogger(500, 5, "logging.yaml");
 
 
