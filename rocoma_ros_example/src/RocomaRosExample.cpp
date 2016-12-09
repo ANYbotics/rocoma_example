@@ -4,8 +4,9 @@
 // message logger
 #include "message_logger/message_logger.hpp"
 
-#include <parameter_handler/parameter_handler.hpp>
-#include <parameter_handler_ros/ParameterHandlerRos.hpp>
+// parameter handler
+#include <parameter_handler_ros/parameter_handler_ros.hpp>
+#include <parameter_handler_std/parameter_handler_std.hpp>
 
 namespace rocoma_ros_example {
 
@@ -18,12 +19,18 @@ RocomaRosExample::RocomaRosExample(NodeHandlePtr nodeHandle):
      command_(new rocomaex_model::Command()),
      mutexState_(new boost::shared_mutex()),
      mutexCommand_(new boost::shared_mutex()),
-     doubleParam_ ("doubleParam",      500.0,  0.0,  2000.0),
      vector3Param_ ("vector3Param",    Eigen::Vector3d{0.2,1.12,2.22},  Eigen::Vector3d{1.20,2.40,1.2340},  Eigen::Vector3d{100.9,50.2,200.2}),
      matrix3Param_ ("matrix3Param", Eigen::Matrix3d::Zero(), Eigen::Matrix3d::Zero(), Eigen::Matrix3d::Constant(100)),
      intParam_("intParam",0,0,20),
+     matrixXParam_("matrixX", Eigen::MatrixXd::Ones(2,3), Eigen::MatrixXd::Zero(2,3), Eigen::MatrixXd::Constant(2,3,1900)),
+     vectorXParam_("vectorX", Eigen::VectorXi::Ones(9), Eigen::VectorXi::Zero(9), Eigen::VectorXi::Constant(9,16)),
      intVector3Param_("intVector",    Eigen::Vector3i{0,1,2},  Eigen::Vector3i{0,0,0},  Eigen::Vector3i{100,50,200})
 {
+  doubleParam_.setName("doubleParam");
+  doubleParam_.setValue(500.0);
+  doubleParam_.setDefaultValue(500.0);
+  doubleParam_.setMinValue(0.0);
+  doubleParam_.setMaxValue(2000.00);
 }
 
 RocomaRosExample::~RocomaRosExample()
@@ -149,16 +156,15 @@ void RocomaRosExample::init()
 
 
   //--- Configure parameter handler
-  parameter_handler::handler.reset(new parameter_handler_ros::ParameterHandlerRos());
-  parameter_handler_ros::ParameterHandlerRos* parameterHandlerRos = static_cast<parameter_handler_ros::ParameterHandlerRos*>(parameter_handler::handler.get());
-  parameterHandlerRos->setNodeHandle(this->getNodeHandle());
-  parameterHandlerRos->initializeServices();
+  parameter_handler_ros::setParameterHandlerRos(this->getNodeHandle());
 
   parameter_handler::handler->addParam(doubleParam_);
   parameter_handler::handler->addParam(vector3Param_);
   parameter_handler::handler->addParam(matrix3Param_);
   parameter_handler::handler->addParam(intParam_);
   parameter_handler::handler->addParam(intVector3Param_);
+  parameter_handler::handler->addParam(matrixXParam_);
+  parameter_handler::handler->addParam(vectorXParam_);
 
 }
 
@@ -166,9 +172,9 @@ bool RocomaRosExample::update(const any_worker::WorkerEvent& event)
 {
   MELO_INFO_THROTTLE_STREAM(1.0, "Double: " << doubleParam_.getValue());
   MELO_INFO_THROTTLE_STREAM(1.0, "Vector: " << vector3Param_.getValue()(0) << " " << vector3Param_.getValue()(1) << " " << vector3Param_.getValue()(2));
-  MELO_INFO_THROTTLE_STREAM(1.0, "M1: " << matrix3Param_.getValue()(0,0) << " " << matrix3Param_.getValue()(0,1) << " " << matrix3Param_.getValue()(0,2));
-  MELO_INFO_THROTTLE_STREAM(1.0, "M2: " << matrix3Param_.getValue()(1,0) << " " << matrix3Param_.getValue()(1,1) << " " << matrix3Param_.getValue()(1,2));
-  MELO_INFO_THROTTLE_STREAM(1.0, "M3: " << matrix3Param_.getValue()(2,0) << " " << matrix3Param_.getValue()(2,1) << " " << matrix3Param_.getValue()(2,2));
+  MELO_INFO_THROTTLE_STREAM(1.0, "M1: " << matrixXParam_.getValue()(0,0) << " " << matrixXParam_.getValue()(0,1) << " " << matrixXParam_.getValue()(0,2));
+  MELO_INFO_THROTTLE_STREAM(1.0, "M2: " << matrixXParam_.getValue()(1,0) << " " << matrixXParam_.getValue()(1,1) << " " << matrixXParam_.getValue()(1,2));
+  MELO_INFO_THROTTLE_STREAM(1.0, "V9: " << vectorXParam_.getValue()(0) << " " << vectorXParam_.getValue()(1) << " " << vectorXParam_.getValue()(2));
 
   //! Advance the controller manager.
   controllerManager_.updateController();

@@ -55,10 +55,12 @@ public:
 
   //! Mutex for actuator commands
   std::shared_ptr<boost::shared_mutex> mutexCommand_;
-  
+
   parameter_handler::Parameter<double> doubleParam_;
   parameter_handler::Parameter<Eigen::Vector3d> vector3Param_;
   parameter_handler::Parameter<Eigen::Matrix3d> matrix3Param_;
+  parameter_handler::Parameter<Eigen::MatrixXd> matrixXParam_;
+  parameter_handler::Parameter<Eigen::VectorXi> vectorXParam_;
   parameter_handler::Parameter<int> intParam_;
   parameter_handler::Parameter<Eigen::Vector3i> intVector3Param_;
 };
