@@ -49,6 +49,6 @@ install(TARGETS ${PROJECT_NAME}
   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 install(FILES
-  rocomaex_emgcy_ctrl1_plugin.xml
+  rocomaex_emgcy_ctrl2_plugin.xml
   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
 )
