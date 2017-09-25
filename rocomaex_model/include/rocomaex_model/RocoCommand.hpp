@@ -1,5 +1,5 @@
 /*
- * Command.hpp
+ * RocoCommand.hpp
  *
  *  Created on: Jul 27, 2016
  *      Author: Gabriel Hottiger
@@ -18,25 +18,25 @@
 
 namespace rocomaex_model {
 
-class Command: public roco::CommandInterface {
+class RocoCommand: public roco::CommandInterface {
 
  public:
 
-  Command(): roco::CommandInterface(),
-             value_()
+  RocoCommand(): roco::CommandInterface(),
+    value_()
   {
 
   }
 
-  ~Command()
+  ~RocoCommand()
   {
 
   }
 
   bool limitCommand() {
-    // Limit the command to a maximum of 5.0
+    // Limit the RocoCommand to a maximum of 5.0
     value_ = std::min(5.0, value_);
-    MELO_INFO_THROTTLE_STREAM(1.0, "[rocoma_example::Command]: Limiting Command");
+    MELO_INFO_THROTTLE_STREAM(1.0, "[rocoma_example::RocoCommand]: Limiting Command");
     return true;
   }
 

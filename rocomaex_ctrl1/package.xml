@@ -1,23 +1,21 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <package format="2">
 
   <name>rocomaex_ctrl1</name>
-  <version>0.0.0</version>
-  <description>First Example Controller</description>
+  <version>0.1.1</version>
+  <description>rocomaex_ctrl1 provides a robot controller that ...</description>
   <maintainer email="gabriel.hottiger@mavt.ethz.ch">Gabriel Hottiger</maintainer>
-  <license>BSD</license>
+  <license>TODO</license>
+  <author email="gabriel.hottiger@mavt.ethz.ch">Gabriel Hottiger</author>
 
   <buildtool_depend>catkin</buildtool_depend>
   <depend>roco</depend>
-  <depend>message_logger</depend>
   <depend>rocomaex_model</depend>
+  <depend>message_logger</depend>
   <depend>rocoma_plugin</depend>
 
-  <!-- IMPORTANT: The xml file has to be imported here. -->
-  <!-- All base classes are located in rocoma_plugin. -->
-  <!-- When defining your own controller package just adapt the xml path of the plugin description. -->
   <export>
-    <rocoma_plugin plugin="${prefix}/rocomaex_ctrl1_plugin.xml" />
+    <rocoma_plugin plugin="${prefix}/rocoma_plugin.xml"/>
   </export>
 
 </package>

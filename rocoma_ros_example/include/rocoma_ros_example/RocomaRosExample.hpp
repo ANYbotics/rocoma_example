@@ -7,8 +7,8 @@
 #include "rocoma_ros/ControllerManagerRos.hpp"
 
 // rocomaex model
-#include "rocomaex_model/State.hpp"
-#include "rocomaex_model/Command.hpp"
+#include "rocomaex_model/RocoState.hpp"
+#include "rocomaex_model/RocoCommand.hpp"
 
 namespace rocoma_ros_example {
 
@@ -40,13 +40,13 @@ public:
   double timeStep_;
 
   //! Controller manager ros
-  rocoma_ros::ControllerManagerRos<rocomaex_model::State, rocomaex_model::Command> controllerManager_;
+  rocoma_ros::ControllerManagerRos<rocomaex_model::RocoState, rocomaex_model::RocoCommand> controllerManager_;
 
   //! Robot state
-  std::shared_ptr<rocomaex_model::State> state_;
+  std::shared_ptr<rocomaex_model::RocoState> state_;
 
   //! Actuator commands
-  std::shared_ptr<rocomaex_model::Command> command_;
+  std::shared_ptr<rocomaex_model::RocoCommand> command_;
 
   //! Mutex for robot state
   std::shared_ptr<boost::shared_mutex> mutexState_;

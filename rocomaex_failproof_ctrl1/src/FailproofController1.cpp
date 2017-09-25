@@ -34,17 +34,9 @@
 // rocomaex ctrl1
 #include "rocomaex_failproof_ctrl1/FailproofController1.hpp"
 
-// rocoma plugin
-#include "rocoma_plugin/rocoma_plugin.hpp"
+// message logger
+#include "message_logger/message_logger.hpp"
 
-/**
- * Helper macro that wraps pluginlib's PLUGINLIB_EXPORT_CLASS(). Needed because of complicated template syntax.
- * @param Name of the controller plugin, also name of derived class in plugin xml file
- * @param State class the controller is templated on
- * @param Command class the controller is templated on
- * @param Type of the controller the plugin should be registered for (this controller)
- */
-ROCOMA_EXPORT_FAILPROOF_CONTROLLER(FailproofController1Plugin, rocomaex_model::State, rocomaex_model::Command, rocomaex_failproof_ctrl1::FailproofController1)
 
 namespace rocomaex_failproof_ctrl1 {
 

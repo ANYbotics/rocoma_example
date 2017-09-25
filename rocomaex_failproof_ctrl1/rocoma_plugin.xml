@@ -1,0 +1,4 @@
+<library path="lib/librocomaex_failproof_ctrl1_plugin">
+  <class type="FailproofController1" base_class_type="rocoma_plugin::FailproofControllerPluginInterface<rocomaex_model::RocoState, rocomaex_model::RocoCommand>">
+  </class>
+</library>

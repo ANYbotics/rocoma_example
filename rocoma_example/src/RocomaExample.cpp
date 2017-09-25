@@ -22,8 +22,8 @@ namespace rocoma_example {
 RocomaExample::RocomaExample(const double timeStep):
       timeStep_(timeStep),
       controllerManager_(),
-			state_(new rocomaex_model::State()),
-			command_(new rocomaex_model::Command()),
+			state_(new rocomaex_model::RocoState()),
+			command_(new rocomaex_model::RocoCommand()),
 			mutexState_(new boost::shared_mutex()),
 			mutexCommand_(new boost::shared_mutex())
 {
@@ -50,15 +50,15 @@ void RocomaExample::init()
    *   This type allows to pair an arbitrary number of controllers to a single controller tuple, in which
    *   the controllers are executed in series (same order as in type specification).
    */
-  using FreezeCtrl = rocoma::FailproofControllerAdapter< rocomaex_failproof_ctrl1::FailproofController1, rocomaex_model::State, rocomaex_model::Command >;
-  using StandCtrl = rocoma::EmergencyControllerAdapter< rocomaex_emgcy_ctrl1::EmergencyController1, rocomaex_model::State, rocomaex_model::Command >;
-  using ArmDefaultCtrl = rocoma::EmergencyControllerAdapter< rocomaex_emgcy_ctrl2::EmergencyController2, rocomaex_model::State, rocomaex_model::Command >;
-  using WalkCtrl = rocoma::ControllerAdapter< rocomaex_ctrl1::Controller1, rocomaex_model::State, rocomaex_model::Command >;
-  using GraspCtrl = rocoma::ControllerAdapter< rocomaex_ctrl2::Controller2, rocomaex_model::State, rocomaex_model::Command >;
-  using GraspAndWalkTuple = roco::ControllerTuple<rocomaex_model::State, rocomaex_model::Command, rocomaex_ctrl1::Controller1, rocomaex_ctrl2::Controller2>;
-  using GraspAndWalkCtrl = rocoma::ControllerAdapter< GraspAndWalkTuple, rocomaex_model::State, rocomaex_model::Command >;
-  using GraspAndStandTuple = roco::ControllerTuple<rocomaex_model::State, rocomaex_model::Command, rocomaex_emgcy_ctrl1::EmergencyController1, rocomaex_ctrl2::Controller2>;
-  using GraspAndStandCtrl = rocoma::ControllerAdapter< GraspAndStandTuple, rocomaex_model::State, rocomaex_model::Command >;
+  using FreezeCtrl = rocoma::FailproofControllerAdapter< rocomaex_failproof_ctrl1::FailproofController1, rocomaex_model::RocoState, rocomaex_model::RocoCommand >;
+  using StandCtrl = rocoma::EmergencyControllerAdapter< rocomaex_emgcy_ctrl1::EmergencyController1, rocomaex_model::RocoState, rocomaex_model::RocoCommand >;
+  using ArmDefaultCtrl = rocoma::EmergencyControllerAdapter< rocomaex_emgcy_ctrl2::EmergencyController2, rocomaex_model::RocoState, rocomaex_model::RocoCommand >;
+  using WalkCtrl = rocoma::ControllerAdapter< rocomaex_ctrl1::Controller1, rocomaex_model::RocoState, rocomaex_model::RocoCommand >;
+  using GraspCtrl = rocoma::ControllerAdapter< rocomaex_ctrl2::Controller2, rocomaex_model::RocoState, rocomaex_model::RocoCommand >;
+  using GraspAndWalkTuple = roco::ControllerTuple<rocomaex_model::RocoState, rocomaex_model::RocoCommand, rocomaex_ctrl1::Controller1, rocomaex_ctrl2::Controller2>;
+  using GraspAndWalkCtrl = rocoma::ControllerAdapter< GraspAndWalkTuple, rocomaex_model::RocoState, rocomaex_model::RocoCommand >;
+  using GraspAndStandTuple = roco::ControllerTuple<rocomaex_model::RocoState, rocomaex_model::RocoCommand, rocomaex_emgcy_ctrl1::EmergencyController1, rocomaex_ctrl2::Controller2>;
+  using GraspAndStandCtrl = rocoma::ControllerAdapter< GraspAndStandTuple, rocomaex_model::RocoState, rocomaex_model::RocoCommand >;
 
   /*** Controllers usually have a default name, use setName to override the default name. The same holds for the parameter
    *   path (set to non-sense in this example). The path is an absolute path or relative path to the current directory at execution time.

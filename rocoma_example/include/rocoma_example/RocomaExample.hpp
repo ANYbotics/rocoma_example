@@ -1,8 +1,8 @@
 #pragma once
 
 // rocomaex model
-#include "rocomaex_model/State.hpp"
-#include "rocomaex_model/Command.hpp"
+#include "rocomaex_model/RocoState.hpp"
+#include "rocomaex_model/RocoCommand.hpp"
 
 // rocoma
 #include "rocoma/ControllerManager.hpp"
@@ -47,10 +47,10 @@ private:
 	rocoma::ControllerManager controllerManager_;
 
 	//! Robot state
-	std::shared_ptr<rocomaex_model::State> state_;
+	std::shared_ptr<rocomaex_model::RocoState> state_;
 
 	//! Actuator commands
-	std::shared_ptr<rocomaex_model::Command> command_;
+	std::shared_ptr<rocomaex_model::RocoCommand> command_;
 
 	//! Mutex for robot state
 	std::shared_ptr<boost::shared_mutex> mutexState_;

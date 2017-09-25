@@ -1,5 +1,5 @@
 /*
- * State.hpp
+ * RocoState.hpp
  *
  *  Created on: Jul 27, 2016
  *      Author: Gabriel Hottiger
@@ -15,23 +15,23 @@
 
 namespace rocomaex_model {
 
-class State: public roco::StateInterface {
+class RocoState: public roco::StateInterface {
 
  public:
 
-  State(): roco::StateInterface(),
-            value_()
+  RocoState(): roco::StateInterface(),
+    value_()
   {
 
   }
 
-  ~State()
+  ~RocoState()
   {
 
   }
 
   bool checkState() const{
-    MELO_INFO_THROTTLE_STREAM(1.0, "[rocoma_example::State]: Checking State");
+    MELO_INFO_THROTTLE_STREAM(1.0, "[rocoma_example::RocoState]: Checking State");
     return true;
   }
 

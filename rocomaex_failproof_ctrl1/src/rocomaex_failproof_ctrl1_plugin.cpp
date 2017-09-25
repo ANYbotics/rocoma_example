@@ -26,49 +26,25 @@
  *
  */
 /*!
- * @file    FailproofController1.hpp
+ * @file    rocomaex_failproof_ctrl1_plugin.cpp
  * @author  Gabriel Hottiger
  * @date    Jul, 2016
  */
 
-#pragma once
-
-// roco
-#include "roco/controllers/FailproofController.hpp"
+// rocomaex ctrl1
+#include "rocomaex_failproof_ctrl1/FailproofController1.hpp"
 
 // rocomaex model
 #include "rocomaex_model/RocoState.hpp"
 #include "rocomaex_model/RocoCommand.hpp"
 
-namespace rocomaex_failproof_ctrl1 {
+// rocoma plugin
+#include "rocoma_plugin/rocoma_plugin.hpp"
 
-//! Example class for a robot controller implementing the roco::FailproofControllerAdapteeInterface
-/**
- * IMPORTANT: Make sure to use virtual inheritance, prevents issues due to multiple inheritance
- */
-class FailproofController1: virtual public roco::FailproofController<rocomaex_model::RocoState, rocomaex_model::RocoCommand>
-{
-
- public:
-  //! Convenience typedef for Base class
-  typedef roco::FailproofController<rocomaex_model::RocoState, rocomaex_model::RocoCommand> Base;
-
- public:
-  /** Default Constructor
-      NOTE: Other constructors can't be invoked when using the plugin mechanism
-   */
-  FailproofController1();
-  //! Destructor
-  virtual ~FailproofController1();
-
-  /** Adaptee Implementation
-        NOTE: Adaptee functionality is hidden from the client
-   */
- protected:
-  virtual bool create(double dt);
-  virtual void advance(double dt);
-  virtual bool cleanup();
-
-};
-
-} // namespace rocomaex_failproof_ctrl1
+// export controller plugin
+ROCOMA_EXPORT_FAILPROOF_CONTROLLER(
+  FailproofController1,
+  rocomaex_model::RocoState,
+  rocomaex_model::RocoCommand,
+  rocomaex_failproof_ctrl1::FailproofController1
+);

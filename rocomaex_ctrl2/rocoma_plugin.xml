@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<library path="lib/librocomaex_ctrl2_plugin">
+  <class type="Controller2" base_class_type="rocoma_plugin::ControllerPluginInterface<rocomaex_model::RocoState, rocomaex_model::RocoCommand>">
+  </class>
+</library>
+<library path="lib/librocomaex_ctrl3_plugin">
+  <class type="Controller3" base_class_type="rocoma_plugin::ControllerPluginInterface<rocomaex_model::RocoState, rocomaex_model::RocoCommand>">
+  </class>
+</library>
+<library path="lib/librocomaex_ctrl4_plugin">
+  <class type="Controller4" base_class_type="rocoma_plugin::ControllerPluginInterface<rocomaex_model::RocoState, rocomaex_model::RocoCommand>">
+  </class>
+</library>

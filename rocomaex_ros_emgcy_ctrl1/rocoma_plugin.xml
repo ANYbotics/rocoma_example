@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<library path="lib/librocomaex_ros_emgcy_ctrl1_plugin">
+  <class type="EmergencyControllerRos1" base_class_type="rocoma_plugin::EmergencyControllerRosPluginInterface<rocomaex_model::RocoState, rocomaex_model::RocoCommand>">
+  </class>
+</library>

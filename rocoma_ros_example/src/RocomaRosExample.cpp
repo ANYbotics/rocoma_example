@@ -9,10 +9,10 @@ namespace rocoma_ros_example {
 RocomaRosExample::RocomaRosExample(NodeHandlePtr nodeHandle):
      any_node::Node(nodeHandle),
      timeStep_(0.01),
-     controllerManager_("rocomaex_model::State",
-                         "rocomaex_model::Command"),
-     state_(new rocomaex_model::State()),
-     command_(new rocomaex_model::Command()),
+     controllerManager_("rocomaex_model::RocoState",
+                         "rocomaex_model::RocoCommand"),
+     state_(new rocomaex_model::RocoState()),
+     command_(new rocomaex_model::RocoCommand()),
      mutexState_(new boost::shared_mutex()),
      mutexCommand_(new boost::shared_mutex())
 {
@@ -50,7 +50,7 @@ void RocomaRosExample::init()
     //! Add controller pairs in code.
 
     //! The fail-proof controller is added by the plugin name
-    std::string failproofControllerPluginName = "FailproofController1Plugin";
+    std::string failproofControllerPluginName = "FailproofController1";
 
     //! --- Setup controller for walking, recovers to a standing position.
     rocoma_ros::ManagedControllerOptionsPair WalkToStand;
@@ -58,13 +58,13 @@ void RocomaRosExample::init()
     /*** Walk controller (ros implementation)
      *   ControllerRos1Plugin is the ros implementation of Controller1Plugin. (see rocoma_example)
      */
-    WalkToStand.first.pluginName_ = "ControllerRos1Plugin";
+    WalkToStand.first.pluginName_ = "ControllerRos1";
     WalkToStand.first.name_ = "WalkRos";
     WalkToStand.first.isRos_ = true;
     WalkToStand.first.parameterPath_ = "param/walk.xml";
 
     //! Stand controller
-    WalkToStand.second.pluginName_ = "EmergencyController1Plugin";
+    WalkToStand.second.pluginName_ = "EmergencyController1";
     WalkToStand.second.name_ = "Stand";
     WalkToStand.second.isRos_ = false;
     WalkToStand.second.parameterPath_ = "param/stand.xml";
@@ -76,7 +76,7 @@ void RocomaRosExample::init()
     rocoma_ros::ManagedControllerOptionsPair GraspToArmDefault;
 
     //! Grasp controller
-    GraspToArmDefault.first.pluginName_ = "Controller2Plugin";
+    GraspToArmDefault.first.pluginName_ = "Controller2";
     GraspToArmDefault.first.name_ = "Grasp";
     GraspToArmDefault.first.isRos_ = false;
     GraspToArmDefault.first.parameterPath_ = "/home/user/parameters/grasp.txt";
@@ -84,7 +84,7 @@ void RocomaRosExample::init()
     /*** Move arm to default controller (ros implementation)
      *   EmergencyControllerRos1Plugin is the ros implementation of EmergencyControllerPlugin2. (see rocoma_example)
      */
-    GraspToArmDefault.second.pluginName_ = "EmergencyControllerRos1Plugin";
+    GraspToArmDefault.second.pluginName_ = "EmergencyControllerRos1";
     GraspToArmDefault.second.name_ = "ArmDefaultRos";
     GraspToArmDefault.second.isRos_ = true;
     GraspToArmDefault.second.parameterPath_ = "armdefault.xml";
@@ -96,7 +96,7 @@ void RocomaRosExample::init()
     rocoma_ros::ManagedControllerOptionsPair WalkAndGrasp;
 
     //! Walking controller
-    WalkAndGrasp.first.pluginName_ = "Controller3Plugin";
+    WalkAndGrasp.first.pluginName_ = "Controller3";
     WalkAndGrasp.first.name_ = "WalkAndGrasp";
     WalkAndGrasp.first.isRos_ = false;
     WalkAndGrasp.first.parameterPath_ = "";
@@ -110,7 +110,7 @@ void RocomaRosExample::init()
     rocoma_ros::ManagedControllerOptionsPair StandAndGraspToArmDefault;
 
     //! Stand and Grasp controller
-    StandAndGraspToArmDefault.first.pluginName_ = "Controller4Plugin";
+    StandAndGraspToArmDefault.first.pluginName_ = "Controller4";
     StandAndGraspToArmDefault.first.name_ = "StandAndGrasp";
     StandAndGraspToArmDefault.first.isRos_ = false;
     StandAndGraspToArmDefault.first.parameterPath_ = "";
@@ -118,7 +118,7 @@ void RocomaRosExample::init()
     /*** Move arm to default controller (ros implementation)
      *   EmergencyControllerRos1Plugin is the ros implementation of EmergencyControllerPlugin2. (see rocoma_example)
      */
-    StandAndGraspToArmDefault.second.pluginName_ = "EmergencyControllerRos1Plugin";
+    StandAndGraspToArmDefault.second.pluginName_ = "EmergencyControllerRos1";
     StandAndGraspToArmDefault.second.name_ = "ArmDefaultRos";
     StandAndGraspToArmDefault.second.isRos_ = true;
     StandAndGraspToArmDefault.second.parameterPath_ = "armdefault.xml";

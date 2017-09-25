@@ -17,7 +17,7 @@
   <!-- All base classes are located in rocoma_plugin. -->
   <!-- When defining your own controller package just adapt the xml path of the plugin description. -->
   <export>
-    <rocoma_plugin plugin="${prefix}/rocomaex_failproof_ctrl1_plugin.xml" />
+    <rocoma_plugin plugin="${prefix}/rocoma_plugin.xml" />
   </export>
 
 </package>

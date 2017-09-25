@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<library path="lib/librocomaex_emgcy_ctrl2_plugin">
+  <class type="EmergencyController2" base_class_type="rocoma_plugin::EmergencyControllerPluginInterface<rocomaex_model::RocoState, rocomaex_model::RocoCommand>">
+  </class>
+</library>
+<library path="lib/librocomaex_ctrl5_plugin">
+  <class type="Controller5" base_class_type="rocoma_plugin::ControllerPluginInterface<rocomaex_model::RocoState, rocomaex_model::RocoCommand>">
+  </class>
+</library>

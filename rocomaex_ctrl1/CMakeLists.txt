@@ -1,54 +1,68 @@
 cmake_minimum_required(VERSION 2.8.3)
+
 project(rocomaex_ctrl1)
-
-add_definitions(-std=c++11)
-
+# Load catkin and all dependencies required for this package
 find_package(catkin REQUIRED COMPONENTS
   roco
-  message_logger
   rocomaex_model
+  message_logger
   rocoma_plugin
 )
+
+find_package(Boost REQUIRED)
+
+# Flags
+add_definitions(-std=c++11)
 
 catkin_package(
   INCLUDE_DIRS include
   LIBRARIES ${PROJECT_NAME}
   CATKIN_DEPENDS
     roco
-    message_logger
     rocomaex_model
+    message_logger
     rocoma_plugin
   DEPENDS
+    Boost
 )
 
-include_directories(
-  include
+include_directories(include
   ${catkin_INCLUDE_DIRS}
+  ${Boost_INCLUDE_DIRS}
 )
 
 add_library(${PROJECT_NAME}
   src/Controller1.cpp
 )
 
-add_dependencies(${PROJECT_NAME} ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
-
 target_link_libraries(${PROJECT_NAME}
   ${catkin_LIBRARIES}
+  ${Boost_LIBRARIES}
 )
 
-#############
-## Install ##
-#############
-install(DIRECTORY include/${PROJECT_NAME}/
-  DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION}
-  PATTERN ".svn" EXCLUDE
+add_dependencies(${PROJECT_NAME}
+  ${catkin_EXPORTED_TARGETS}
 )
-install(TARGETS ${PROJECT_NAME}
+
+add_library(${PROJECT_NAME}_plugin
+  src/rocomaex_ctrl1_plugin.cpp
+)
+
+target_link_libraries(${PROJECT_NAME}_plugin
+  ${catkin_LIBRARIES}
+  ${PROJECT_NAME}
+)
+
+install(FILES rocoma_plugin.xml
+  DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
+)
+
+install(TARGETS ${PROJECT_NAME} ${PROJECT_NAME}_plugin
   ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
   LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
-install(FILES
-  rocomaex_ctrl1_plugin.xml
-  DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
+
+install(DIRECTORY include/${PROJECT_NAME}/
+  DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION}
 )
