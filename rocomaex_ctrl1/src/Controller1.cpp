@@ -63,6 +63,13 @@ bool Controller1::advance(double dt) {
   // Set the command to twice the state
   getCommand().setValue(2*getState().getValue());
   MELO_INFO_THROTTLE_STREAM(1.0, "Controller " << this->getName() << " is advanced!");
+  if(sm_ != nullptr) {
+    double sharedModuleState;
+    if(sm_->foo(sharedModuleState)){
+      MELO_INFO_THROTTLE_STREAM(1.0, "Controller " << this->getName() << " shared module state is " << sharedModuleState << ".");
+    }
+  }
+
   return true;
 }
 
@@ -98,7 +105,9 @@ bool Controller1::getSwapState(roco::ControllerSwapStateInterfacePtr& swapState)
 }
 
 bool Controller1::addSharedModule(const roco::SharedModulePtr& module) {
-  return false;
+  auto sm = std::dynamic_pointer_cast<rocomaex_model::MySharedModule>(module);
+  if( sm != nullptr ) { sm_ = sm; }
+  return sm != nullptr;
 }
 
 

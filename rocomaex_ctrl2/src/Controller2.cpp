@@ -33,6 +33,12 @@ bool Controller2::initialize(double dt) {
 
 bool Controller2::advance(double dt) {
   MELO_INFO_THROTTLE_STREAM(1.0, "Controller " << this->getName() << " is advanced!");
+  if(sm_ != nullptr) {
+    double sharedModuleState;
+    if(sm_->foo(sharedModuleState)){
+      MELO_INFO_THROTTLE_STREAM(1.0, "Controller " << this->getName() << " shared module state is " << sharedModuleState << ".");
+    }
+  }
   return true;
 }
 
@@ -67,7 +73,9 @@ bool Controller2::getSwapState(roco::ControllerSwapStateInterfacePtr& swapState)
 }
 
 bool Controller2::addSharedModule(const roco::SharedModulePtr& module) {
-  return false;
+  auto sm = std::dynamic_pointer_cast<rocomaex_model::MySharedModule>(module);
+  if( sm != nullptr ) { sm_ = sm; }
+  return sm != nullptr;
 }
 
 } /* namespace rocomaex_ctrl2 */

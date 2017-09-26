@@ -10,5 +10,10 @@
   <buildtool_depend>catkin</buildtool_depend>
   <depend>roco</depend>
   <depend>message_logger</depend>
+  <depend>rocoma_plugin</depend>
+
+  <export>
+    <rocoma_plugin plugin="${prefix}/rocoma_plugin.xml"/>
+  </export>
 
 </package>

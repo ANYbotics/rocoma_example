@@ -52,6 +52,14 @@ void RocomaRosExample::init()
     //! The fail-proof controller is added by the plugin name
     std::string failproofControllerPluginName = "FailproofController1";
 
+
+    std::vector<rocoma_ros::ManagedModuleOptions> sharedModuleOptions(1);
+    sharedModuleOptions.at(0).pluginName_ = "MySharedModule";
+    sharedModuleOptions.at(0).name_ = "MySharedModule";
+    sharedModuleOptions.at(0).parameterPath_ = "";
+    sharedModuleOptions.at(0).isRos_ = false;
+    controllerManager_.setupSharedModules(sharedModuleOptions);
+
     //! --- Setup controller for walking, recovers to a standing position.
     rocoma_ros::ManagedControllerOptionsPair WalkToStand;
 
@@ -80,6 +88,7 @@ void RocomaRosExample::init()
     GraspToArmDefault.first.name_ = "Grasp";
     GraspToArmDefault.first.isRos_ = false;
     GraspToArmDefault.first.parameterPath_ = "/home/user/parameters/grasp.txt";
+    GraspToArmDefault.first.sharedModuleNames_ = {"MySharedModule"};
 
     /*** Move arm to default controller (ros implementation)
      *   EmergencyControllerRos1Plugin is the ros implementation of EmergencyControllerPlugin2. (see rocoma_example)
@@ -114,6 +123,8 @@ void RocomaRosExample::init()
     StandAndGraspToArmDefault.first.name_ = "StandAndGrasp";
     StandAndGraspToArmDefault.first.isRos_ = false;
     StandAndGraspToArmDefault.first.parameterPath_ = "";
+    StandAndGraspToArmDefault.first.sharedModuleNames_ = {"MySharedModule"};
+
 
     /*** Move arm to default controller (ros implementation)
      *   EmergencyControllerRos1Plugin is the ros implementation of EmergencyControllerPlugin2. (see rocoma_example)

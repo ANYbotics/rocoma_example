@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<library path="lib/librocomaex_shared_module_plugin">
+  <class type="MySharedModule" base_class_type="rocoma_plugin::SharedModulePluginInterface">
+  </class>
+</library>

@@ -14,6 +14,7 @@
 // state and command
 #include "rocomaex_model/RocoState.hpp"
 #include "rocomaex_model/RocoCommand.hpp"
+#include "rocomaex_model/MySharedModule.hpp"
 
 namespace rocomaex_ctrl2 {
 
@@ -58,6 +59,9 @@ class Controller2: virtual public roco::Controller<rocomaex_model::RocoState, ro
 
   //! Add shared module 'module' to controller Controller2.
   virtual bool addSharedModule(const roco::SharedModulePtr& module);
+
+ private:
+  std::shared_ptr<rocomaex_model::MySharedModule> sm_;
 
 
 };

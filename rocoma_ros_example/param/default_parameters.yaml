@@ -1,49 +1,61 @@
 controller_manager:
-  failproof_controller: "FailproofController1Plugin"
+  failproof_controller: "FailproofController1"
+
+  shared_modules:
+    - shared_module:
+        plugin_name:              "MySharedModule"
+        name:                     "MySharedModule"
+        is_ros:                   false
+        parameter_package:        ""
+        parameter_path:           ""
 
   controller_pairs:
     - controller_pair:
         controller:
-          plugin_name:              "ControllerRos1Plugin"
+          plugin_name:              "ControllerRos1"
           name:                     "WalkRos"
           is_ros:                   true
           parameter_package:        "rocomaex_ctrl1"
           parameter_path:           "param/walk.xml"
         emergency_controller:
-          plugin_name:              "EmergencyController1Plugin"
+          plugin_name:              "EmergencyController1"
           name:                     "Stand"
           is_ros:                   false
           parameter_package:        "rocomaex_emgcy_ctrl1"
           parameter_path:           "param/stand.yaml"
     - controller_pair:
         controller:
-          plugin_name:              "Controller2Plugin"
+          plugin_name:              "Controller2"
           name:                     "Grasp"
           is_ros:                   false
           parameter_package:        ""
           parameter_path:           "/home/user/parameters/grasp.txt"
+          shared_modules:
+            - "MySharedModule"
         emergency_controller:
-          plugin_name:              "EmergencyControllerRos1Plugin"
+          plugin_name:              "EmergencyControllerRos1"
           name:                     "ArmDefaultRos"
           is_ros:                   true
           parameter_package:        "rocomaex_emgcy_ctrl2"
           parameter_path:           "armdefault.xml"
     - controller_pair:
         controller:
-          plugin_name:              "Controller3Plugin"
+          plugin_name:              "Controller3"
           name:                     "WalkAndGrasp"
           is_ros:                   false
           parameter_package:        "rocomaex_ros_ctrl1"
           parameter_path:           ""
     - controller_pair:
         controller:
-          plugin_name:              "Controller4Plugin"
+          plugin_name:              "Controller4"
           name:                     "StandAndGrasp"
           is_ros:                   false
           parameter_package:        "rocomaex_ros_ctrl1"
           parameter_path:           ""
+          shared_modules:
+            - "MySharedModule"
         emergency_controller:
-          plugin_name:              "EmergencyControllerRos1Plugin"
+          plugin_name:              "EmergencyControllerRos1"
           name:                     "ArmDefaultRos"
           is_ros:                   true
           parameter_package:        "rocomaex_emgcy_ctrl2"
