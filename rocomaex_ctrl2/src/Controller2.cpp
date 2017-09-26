@@ -8,6 +8,7 @@
 
 // rocomaex_ctrl2
 #include "rocomaex_ctrl2/Controller2.hpp"
+#include "rocomaex_model/MySwapState.hpp"
 
 namespace rocomaex_ctrl2 {
 
@@ -63,8 +64,26 @@ bool Controller2::cleanup() {
 }
 
 bool Controller2::swap(double dt, const roco::ControllerSwapStateInterfacePtr& swapState) {
-  // Call current class reset / initialize
-  return isInitialized() ? Controller2::reset(dt) : Controller2::initialize(dt);
+  if(Controller2::initialize(dt)) {
+    // Build up vector of pointers
+    std::vector<roco::ControllerSwapStateInterface *> states;
+
+    // First check if tuple state
+    roco::ControllerTupleSwapState * tupleState = dynamic_cast<roco::ControllerTupleSwapState *>(swapState.get());
+    if(tupleState != nullptr) {
+      for(auto& s : tupleState->getSwapStates() ) { states.push_back(s.get()); }
+    } else {
+      states.push_back(swapState.get());
+    }
+    for(auto& state : states) {
+      rocomaex_model::MySwapState * myState = dynamic_cast<rocomaex_model::MySwapState * >(state);
+      if(myState != nullptr) {
+        MELO_INFO_STREAM("Controller " << this->getName() << " got state with value " << myState->getState() << " during swap!");
+      }
+    }
+    return true;
+  }
+  return false;
 }
 
 bool Controller2::getSwapState(roco::ControllerSwapStateInterfacePtr& swapState) {

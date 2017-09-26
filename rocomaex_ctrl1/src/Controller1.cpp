@@ -8,6 +8,7 @@
 
 // rocomaex_ctrl1
 #include "rocomaex_ctrl1/Controller1.hpp"
+#include "rocomaex_model/MySwapState.hpp"
 
 // boost
 #include <boost/thread/shared_mutex.hpp>
@@ -100,7 +101,7 @@ bool Controller1::swap(double dt, const roco::ControllerSwapStateInterfacePtr& s
 }
 
 bool Controller1::getSwapState(roco::ControllerSwapStateInterfacePtr& swapState) {
-  swapState.reset(nullptr);
+  swapState.reset( new rocomaex_model::MySwapState(17.34) );
   return true;
 }
 
