@@ -29,7 +29,7 @@ int main(int argc, char **argv)
   boost::asio::io_service io;
   unsigned int i = 0;
 
-  while(i < (10/dt)) {
+  while(i < (30/dt)) {
     boost::asio::deadline_timer t(io, boost::posix_time::milliseconds(dt*1000));
 
     // Switch to walk after a second
@@ -37,13 +37,28 @@ int main(int argc, char **argv)
       highlevelController.walk();
     }
 
-    // Call emergency stop after 4 seconds
-    if(i == static_cast<unsigned int>(4/dt)) {
+    // Switch to grasp after 8 seconds
+    if(i == static_cast<unsigned int>(8/dt)) {
+      highlevelController.grasp();
+    }
+
+    // Call emergency stop after 12 seconds
+    if(i == static_cast<unsigned int>(12/dt)) {
       highlevelController.emergencyStop();
     }
 
-    // Call second emergency stop after 6 seconds
-    if(i == static_cast<unsigned int>(6/dt)) {
+    // Switch to standAndGrasp after 16 seconds
+    if(i == static_cast<unsigned int>(16/dt)) {
+      highlevelController.standAndGrasp();
+    }
+
+    // Call emergency stop after 22 seconds
+    if(i == static_cast<unsigned int>(22/dt)) {
+      highlevelController.emergencyStop();
+    }
+
+    // Call second emergency stop after 25 seconds
+    if(i == static_cast<unsigned int>(25/dt)) {
       highlevelController.emergencyStop();
     }
 

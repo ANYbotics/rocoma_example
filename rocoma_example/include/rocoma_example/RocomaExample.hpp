@@ -36,8 +36,14 @@ public:
 	//! Switch to walk
 	virtual void walk();
 
-	//! Emergency stop
-	virtual void emergencyStop();
+    //! Switch to grasp
+    virtual void grasp();
+
+    //! Switch to standAndGrasp
+    virtual void standAndGrasp();
+
+    //! Emergency stop
+    virtual void emergencyStop();
 
 private:
 	//! Time step determines update frequency

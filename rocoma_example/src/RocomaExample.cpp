@@ -77,6 +77,11 @@ void RocomaExample::init()
 
   //--- Setup all emergency controllers. Again we use a unique_ptr to indicate the ownership of the controller.
 
+  //! Shared module
+  roco::SharedModulePtr shared_module(new rocomaex_model::MySharedModule());
+  shared_module->setName("MySharedModule");
+  shared_module->setParameterPath("");
+
   //! Setup a controller that brings the quadruped into a standing position.
   std::unique_ptr<StandCtrl> stand(new StandCtrl());
   stand->setName("Stand");
@@ -104,6 +109,7 @@ void RocomaExample::init()
   grasp->setName("Grasp");
   grasp->setStateAndCommand(state_, mutexState_, command_, mutexCommand_);
   grasp->setParameterPath("param/grasp.txt");
+  grasp->addControllerSharedModule(shared_module);
 
   //! Setup controller that combines the grasping and walking task.
   std::unique_ptr<GraspAndWalkCtrl> graspAndWalk(new GraspAndWalkCtrl());
@@ -116,7 +122,7 @@ void RocomaExample::init()
   graspAndStand->setName("StandAndGrasp");
   graspAndStand->setStateAndCommand(state_, mutexState_, command_, mutexCommand_);
   graspAndStand->setParameterPath("standAndGrasp.yaml");
-
+  graspAndStand->addControllerSharedModule(shared_module);
   // ---
 
   /*** Initialize controller manager. If the default constructor of the manager was called,
@@ -127,6 +133,7 @@ void RocomaExample::init()
   managerOptions.isRealRobot = false;
   managerOptions.timeStep = timeStep_;
   controllerManager_.init(managerOptions);
+  controllerManager_.addSharedModule(std::move(shared_module));
 
   /*** Now the controllers can be added to the manager. Controllers must have unique names.
    *   However, multiple instances of the same controller with a different name can be added.
@@ -158,6 +165,18 @@ void RocomaExample::walk()
 {
   //! Switch to the walking controller
   controllerManager_.switchController("Walk");
+}
+
+void RocomaExample::grasp()
+{
+  //! Switch to the walking controller
+  controllerManager_.switchController("Grasp");
+}
+
+void RocomaExample::standAndGrasp()
+{
+  //! Switch to the walking controller
+  controllerManager_.switchController("StandAndGrasp");
 }
 
 void RocomaExample::emergencyStop()
