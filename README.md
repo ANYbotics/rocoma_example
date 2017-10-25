@@ -16,7 +16,7 @@ The source code is released under a [BSD 3-Clause license](LICENSE).
 
 ## Building
 
-[![Build Status](http://rsl-ci.ethz.ch/buildStatus/icon?job=rocoma_example)](http://rsl-ci.ethz.ch/job/rocoma_example/)
+[![Build Status](https://ci.leggedrobotics.com/buildStatus/icon?job=bitbucket_leggedrobotics/rocoma_example/master)](https://ci.leggedrobotics.com/job/bitbucket_leggedrobotics/job/rocoma_example/job/master/)
 
 In order to install, clone the latest version from this repository into your catkin workspace and compile the packages.
 
