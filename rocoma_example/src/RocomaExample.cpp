@@ -22,14 +22,10 @@ namespace rocoma_example {
 RocomaExample::RocomaExample(const double timeStep):
       timeStep_(timeStep),
       controllerManager_(),
-			state_(new rocomaex_model::RocoState()),
-			command_(new rocomaex_model::RocoCommand()),
-			mutexState_(new boost::shared_mutex()),
-			mutexCommand_(new boost::shared_mutex())
-{
-}
-
-RocomaExample::~RocomaExample()
+      state_(new rocomaex_model::RocoState()),
+      command_(new rocomaex_model::RocoCommand()),
+      mutexState_(new boost::shared_mutex()),
+      mutexCommand_(new boost::shared_mutex())
 {
 }
 

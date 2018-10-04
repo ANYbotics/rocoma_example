@@ -27,10 +27,10 @@ catkin_package(
     rocoma
     rocomaex_model
     rocomaex_ctrl1
-  	rocomaex_ctrl2
-  	rocomaex_emgcy_ctrl1
-  	rocomaex_emgcy_ctrl2
-  	rocomaex_failproof_ctrl1
+    rocomaex_ctrl2
+    rocomaex_emgcy_ctrl1
+    rocomaex_emgcy_ctrl2
+    rocomaex_failproof_ctrl1
   DEPENDS Boost
 )
 

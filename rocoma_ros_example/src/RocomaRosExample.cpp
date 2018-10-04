@@ -18,11 +18,7 @@ RocomaRosExample::RocomaRosExample(NodeHandlePtr nodeHandle):
 {
 }
 
-RocomaRosExample::~RocomaRosExample()
-{
-}
-
-void RocomaRosExample::init()
+bool RocomaRosExample::init()
 {
   /*** |--- EXAMPLE DESCRIPTION
    *   Let's assume a quadruped with an additional arm for manipulations. The quadruped can walk and grasp things,
@@ -58,7 +54,9 @@ void RocomaRosExample::init()
     sharedModuleOptions.at(0).name_ = "MySharedModule";
     sharedModuleOptions.at(0).parameterPath_ = "";
     sharedModuleOptions.at(0).isRos_ = false;
-    controllerManager_.setupSharedModules(sharedModuleOptions);
+    if(!controllerManager_.setupSharedModules(sharedModuleOptions)) {
+      return false;
+    }
 
     //! --- Setup controller for walking, recovers to a standing position.
     rocoma_ros::ManagedControllerOptionsPair WalkToStand;
@@ -140,16 +138,21 @@ void RocomaRosExample::init()
     std::vector<rocoma_ros::ManagedControllerOptionsPair> controllerPairs {WalkToStand, GraspToArmDefault, WalkAndGrasp, StandAndGraspToArmDefault};
 
     // Setup the controllers
-    controllerManager_.setupControllers(failproofControllerPluginName, controllerPairs, state_, command_, mutexState_, mutexCommand_);
+    if(!controllerManager_.setupControllers(failproofControllerPluginName, controllerPairs, state_, command_, mutexState_, mutexCommand_)) {
+      return false;
+    }
   }
 
   else {
       /** Setup the controllers via the rosparam server. See param/default_parameters.yaml to see how
        *  the controller pair details have to be loaded onto the rosparam server.
        */
-      controllerManager_.setupControllersFromParameterServer( state_, command_, mutexState_, mutexCommand_);
+      if(!controllerManager_.setupControllersFromParameterServer( state_, command_, mutexState_, mutexCommand_)) {
+        return false;
+      }
   }
 
+  return true;
 }
 
 bool RocomaRosExample::update(const any_worker::WorkerEvent& event)
