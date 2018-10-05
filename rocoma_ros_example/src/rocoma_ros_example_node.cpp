@@ -1,7 +1,7 @@
-// rocoma example
+// rocoma ros example
 #include "rocoma_ros_example/RocomaRosExample.hpp"
 
-// nodewrap
+// any node
 #include "any_node/Nodewrap.hpp"
 
 

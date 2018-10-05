@@ -10,7 +10,7 @@ RocomaRosExample::RocomaRosExample(NodeHandlePtr nodeHandle):
      any_node::Node(nodeHandle),
      timeStep_(0.01),
      controllerManager_("rocomaex_model::RocoState",
-                         "rocomaex_model::RocoCommand"),
+                        "rocomaex_model::RocoCommand"),
      state_(new rocomaex_model::RocoState()),
      command_(new rocomaex_model::RocoCommand()),
      mutexState_(new boost::shared_mutex()),
