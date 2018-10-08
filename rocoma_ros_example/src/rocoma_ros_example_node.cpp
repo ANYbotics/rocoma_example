@@ -1,13 +1,13 @@
-// rocoma example
+// rocoma ros example
 #include "rocoma_ros_example/RocomaRosExample.hpp"
 
-// nodewrap
+// any node
 #include "any_node/Nodewrap.hpp"
 
 
 int main(int argc, char **argv)
 {
-  any_node::Nodewrap<rocoma_ros_example::RocomaRosExample> node(argc, argv, "rocoma_ros_example", 4, true, 1);
+  any_node::Nodewrap<rocoma_ros_example::RocomaRosExample> node(argc, argv, "rocoma_ros_example", 4, true);
   node.execute();
   return 0;
 }

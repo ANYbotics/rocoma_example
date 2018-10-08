@@ -24,16 +24,16 @@ public:
   RocomaRosExample(NodeHandlePtr nodeHandle);
 
   //! Destructor
-  ~RocomaRosExample();
+  ~RocomaRosExample() override = default;
 
   //! Init the ros example
-  virtual void init();
+  bool init() override;
 
   //! Update the ros example
-  virtual bool update(const any_worker::WorkerEvent& event);
+  bool update(const any_worker::WorkerEvent& event);
 
   //! Cleanup the ros example
-  virtual void cleanup();
+  void cleanup() override;
 
  private:
   //! Time step determines update frequency
