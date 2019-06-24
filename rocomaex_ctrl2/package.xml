@@ -4,9 +4,9 @@
   <name>rocomaex_ctrl2</name>
   <version>0.1.1</version>
   <description>rocomaex_ctrl2 provides a robot controller that ...</description>
-  <maintainer email="gabriel.hottiger@mavt.ethz.ch">Gabriel Hottiger</maintainer>
+  <maintainer email="ghottiger@anybotics.com">Gabriel Hottiger</maintainer>
   <license>TODO</license>
-  <author email="gabriel.hottiger@mavt.ethz.ch">Gabriel Hottiger</author>
+  <author email="ghottiger@anybotics.com">Gabriel Hottiger</author>
 
   <buildtool_depend>catkin</buildtool_depend>
   <depend>roco</depend>
