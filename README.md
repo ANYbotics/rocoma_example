@@ -16,14 +16,12 @@ The source code is released under a [BSD 3-Clause license](LICENSE).
 
 ## Building
 
-[![Build Status](https://ci.leggedrobotics.com/buildStatus/icon?job=bitbucket_leggedrobotics/rocoma_example/master)](https://ci.leggedrobotics.com/job/bitbucket_leggedrobotics/job/rocoma_example/job/master/)
-
 In order to install, clone the latest version from this repository into your catkin workspace and compile the packages.
 
 ### Dependencies
 
 * **[rocoma](https://bitbucket.org/leggedrobotics/rocoma):** Robot controller manager library
-	
+
 
 ## Bugs & Feature Requests
 
