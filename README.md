@@ -2,7 +2,7 @@
 
 ## Overview
 
-This software package provides an example for the C++ robot controller manager [roma](https://bitbucket.org/leggedrobotics/rocoma).
+This software package provides an example for the C++ robot controller manager [roma](https://github.com/anybotics/rocoma).
 
 A complete documentation of rocoma is available [here](http://docs.leggedrobotics.com/rocoma_doc/).
 
@@ -20,9 +20,4 @@ In order to install, clone the latest version from this repository into your cat
 
 ### Dependencies
 
-* **[rocoma](https://bitbucket.org/leggedrobotics/rocoma):** Robot controller manager library
-
-
-## Bugs & Feature Requests
-
-Please report bugs and request features using the [Issue Tracker](https://github.com/ethz-asl/ros_best_practices/issues).
+* **[rocoma](https://github.com/anybotics/rocoma):** Robot controller manager library

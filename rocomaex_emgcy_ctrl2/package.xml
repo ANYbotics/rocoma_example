@@ -7,6 +7,7 @@
   <maintainer email="ghottiger@anybotics.com">Gabriel Hottiger</maintainer>
   <license>TODO</license>
   <author email="ghottiger@anybotics.com">Gabriel Hottiger</author>
+  <url>https://github.com/anybotics/rocoma_example</url>
 
   <buildtool_depend>catkin</buildtool_depend>
   <depend>roco</depend>

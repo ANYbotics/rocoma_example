@@ -6,6 +6,7 @@
   <description>The rocoma_example package</description>
   <maintainer email="ghottiger@anybotics.com">Gabriel Hottiger</maintainer>
   <license>BSD</license>
+  <url>https://github.com/anybotics/rocoma_example</url>
 
   <buildtool_depend>catkin</buildtool_depend>
   <depend>message_logger</depend>
