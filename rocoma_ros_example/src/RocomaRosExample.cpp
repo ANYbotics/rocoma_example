@@ -21,7 +21,7 @@ RocomaRosExample::RocomaRosExample(NodeHandlePtr nodeHandle):
 bool RocomaRosExample::init()
 {
   /*** |--- EXAMPLE DESCRIPTION
-   *   Let's assume a quadruped with an additional arm for manipulations. The quadruped can walk and grasp things,
+   *   Let's assume a anymal with an additional arm for manipulations. The anymal can walk and grasp things,
    *   which are located on top of its torso. When walking fails or an emergency stop occurs it moves into a standing
    *   position. If the grasping task fails it moves the arm to a default configuration. It can also execute the tasks
    *   simultaneously, but does not know a proper reaction to a failure and thus freezes all the joints. There is also

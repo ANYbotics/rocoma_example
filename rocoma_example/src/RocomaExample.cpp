@@ -32,7 +32,7 @@ RocomaExample::RocomaExample(const double timeStep):
 void RocomaExample::init()
 {
   /*** |--- EXAMPLE DESCRIPTION
-   *   Let's assume a quadruped with an additional arm for manipulations. The quadruped can walk and grasp things,
+   *   Let's assume a anymal with an additional arm for manipulations. The anymal can walk and grasp things,
    *   which are located on top of its torso. When walking fails or an emergency stop occurs it moves into a standing
    *   position. If the grasping task fails it moves the arm to a default configuration. It can also execute the tasks
    *   simultaneously, but does not know a proper reaction to a failure and thus freezes all the joints. There is also
@@ -78,7 +78,7 @@ void RocomaExample::init()
   shared_module->setName("MySharedModule");
   shared_module->setParameterPath("");
 
-  //! Setup a controller that brings the quadruped into a standing position.
+  //! Setup a controller that brings the anymal into a standing position.
   std::unique_ptr<StandCtrl> stand(new StandCtrl());
   stand->setName("Stand");
   stand->setStateAndCommand(state_, mutexState_, command_, mutexCommand_);
@@ -94,13 +94,13 @@ void RocomaExample::init()
 
   //--- Setup all controllers. Again we use a unique_ptr to indicate the ownership of the controller.
 
-  //! Setup controller that enables quadruped to walk.
+  //! Setup controller that enables anymal to walk.
   std::unique_ptr<WalkCtrl> walk(new WalkCtrl());
   walk->setName("Walk");
   walk->setStateAndCommand(state_, mutexState_, command_, mutexCommand_);
   walk->setParameterPath("param/walk/parameters.xml");
 
-  //! Setup controller that grasps things located on the quadruped's torso.
+  //! Setup controller that grasps things located on the anymal's torso.
   std::unique_ptr<GraspCtrl> grasp(new GraspCtrl());
   grasp->setName("Grasp");
   grasp->setStateAndCommand(state_, mutexState_, command_, mutexCommand_);
