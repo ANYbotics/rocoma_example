@@ -4,7 +4,8 @@
   <name>rocomaex_emgcy_ctrl1</name>
   <version>0.1.1</version>
   <description>rocomaex_emgcy_ctrl1 provides a robot controller that ...</description>
-  <maintainer email="ghottiger@anybotics.com">Gabriel Hottiger</maintainer>
+  <maintainer email="avijayan@anybotics.com">Aravind Vijayan</maintainer>
+  <maintainer email="fgiraldez@anybotics.com">Francisco Giráldez Gámez</maintainer>
   <license>TODO</license>
   <author email="ghottiger@anybotics.com">Gabriel Hottiger</author>
   <url>https://github.com/anybotics/rocoma_example</url>

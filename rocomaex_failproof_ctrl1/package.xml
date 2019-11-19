@@ -4,7 +4,8 @@
   <name>rocomaex_failproof_ctrl1</name>
   <version>0.0.0</version>
   <description>First Failproof Controller</description>
-  <maintainer email="ghottiger@anybotics.com">Gabriel Hottiger</maintainer>
+  <maintainer email="avijayan@anybotics.com">Aravind Vijayan</maintainer>
+  <maintainer email="fgiraldez@anybotics.com">Francisco Giráldez Gámez</maintainer>
   <license>BSD</license>
   <url>https://github.com/anybotics/rocoma_example</url>
 
