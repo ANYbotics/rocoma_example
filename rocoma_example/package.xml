@@ -4,6 +4,7 @@
   <name>rocoma_example</name>
   <version>0.0.0</version>
   <description>The rocoma_example package</description>
+  <author email="ghottiger@anybotics.com">Gabriel Hottiger</author>
   <maintainer email="avijayan@anybotics.com">Aravind Vijayan</maintainer>
   <maintainer email="fgiraldez@anybotics.com">Francisco Giráldez Gámez</maintainer>
   <license>BSD</license>

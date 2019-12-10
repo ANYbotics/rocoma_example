@@ -6,7 +6,7 @@
   <description>rocomaex_ros_ctrl1 provides a robot controller that ...</description>
   <maintainer email="avijayan@anybotics.com">Aravind Vijayan</maintainer>
   <maintainer email="fgiraldez@anybotics.com">Francisco Giráldez Gámez</maintainer>
-  <license>TODO</license>
+  <license>BSD</license>
   <author email="ghottiger@anybotics.com">Gabriel Hottiger</author>
   <url>https://github.com/anybotics/rocoma_example</url>
 

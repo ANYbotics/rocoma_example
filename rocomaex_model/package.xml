@@ -4,6 +4,7 @@
   <name>rocomaex_model</name>
   <version>0.0.0</version>
   <description>The rocomaex_model package</description>
+  <author email="ghottiger@anybotics.com">Gabriel Hottiger</author>
   <maintainer email="avijayan@anybotics.com">Aravind Vijayan</maintainer>
   <maintainer email="fgiraldez@anybotics.com">Francisco Giráldez Gámez</maintainer>
   <license>BSD</license>
